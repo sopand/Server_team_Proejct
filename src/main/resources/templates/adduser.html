@@ -15,7 +15,7 @@
     <header th:replace="header :: header"></header>
 
     <main class="adduser_main_con">
-        <div class="adduser_main_box">
+        <form class="adduser_main_box">
             <label class="add_tag1">
                 <span>아이디 : </span>
                 <input name="name" type="text">
@@ -32,16 +32,62 @@
                 <span>휴대전화 : </span>
                 <input name="tel" type="tel">
             </label>
-            <label class="add_tag2">
+            <label class="add_tag1">
                 <span>관심 운동 : </span>
-                <select >
+                <select>
                     <option value="">본인의 운동 선택</option>
                     <option th:each="sports :${getSports}" th:value="${sports.getSpoNo()}" th:text="${sports.getSpoName()}">본인의 운동 선택</option>
-
+                    <option value="기타">기타</option>
                 </select>
             </label>
+            <div class="add_tag2">
+                <span>주 운동 시간대 : </span>
+                <div class="tag_time">
+                    <select name="day1">
+                        <option value="AM">오전</option>
+                        <option value="PM">오후</option>
+                    </select>
 
-        </div>
+                    <select name="time1">
+                        <option value="1">1시</option>
+                        <option value="2">2시</option>
+                        <option value="3">3시</option>
+                        <option value="4">4시</option>
+                        <option value="5">5시</option>
+                        <option value="6">6시</option>
+                        <option value="7">7시</option>
+                        <option value="8">8시</option>
+                        <option value="9">9시</option>
+                        <option value="10">10시</option>
+                        <option value="11">11시</option>
+                        <option value="12">12시</option>
+                    </select> 에서
+                    <select name="day2">
+                        <option value="AM">오전</option>
+                        <option value="PM">오후</option>
+                    </select>
+                    <select name="time2">
+                        <option value="1">1시</option>
+                        <option value="2">2시</option>
+                        <option value="3">3시</option>
+                        <option value="4">4시</option>
+                        <option value="5">5시</option>
+                        <option value="6">6시</option>
+                        <option value="7">7시</option>
+                        <option value="8">8시</option>
+                        <option value="9">9시</option>
+                        <option value="10">10시</option>
+                        <option value="11">11시</option>
+                        <option value="12">12시</option>
+                    </select>
+                    까지
+
+                </div>
+            </div>
+
+            <button class="adduser_btn">회원 등록 완료</button>
+
+        </form>
 
     </main>
 
