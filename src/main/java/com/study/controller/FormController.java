@@ -1,4 +1,4 @@
-package com.study;
+package com.study.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FormController {
 
     @GetMapping("/index")
-    public String indexForm(){
+    public String indexFormM(){
+
         return "index";
     }
+
 
 }

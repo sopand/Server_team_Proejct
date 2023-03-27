@@ -1,0 +1,20 @@
+.container{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.login_main_con{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login_main_box{
+    width:900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:1px solid #e2e2e2;
+}

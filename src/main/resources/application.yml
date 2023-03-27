@@ -59,8 +59,8 @@ logging:
         web: DEBUG
       hibernate: DEBUG
 file:
-  Upfolder: file:///ImgList/MyBlog/
-  Upimg: C:/ImgList/MyBlog/
+  Upfolder: file:///ImgList/SportTeam/
+  Upimg: C:/ImgList/SportTeam/
 ---
 spring:
   config:
