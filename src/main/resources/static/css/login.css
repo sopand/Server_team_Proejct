@@ -103,8 +103,13 @@
     font-weight: bold;
     margin-top:10px;
 }
-.login_text_box img{
+
+.sns_btn_box{
+    width:400px;
+    margin-top: 10px;
+}
+.sns_btn_box img{
     width:400px;
     height:55px;
-    margin-top: 10px;
+
 }

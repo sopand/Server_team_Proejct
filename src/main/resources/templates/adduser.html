@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/adduser.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/reset2.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/header.css">
+
+</head>
+<body>
+<div class="container">
+    <header th:replace="header :: header"></header>
+
+    <main class="adduser_main_con">
+        <div class="adduser_main_box">
+            <label class="add_tag1">
+                <span>아이디 : </span>
+                <input name="name" type="text">
+            </label>
+            <label class="add_tag1">
+                <span>이메일 : </span>
+                <input name="email" type="email">
+            </label>
+            <label class="add_tag1">
+                <span>비밀번호 : </span>
+                <input name="password" type="password">
+            </label>
+            <label class="add_tag1">
+                <span>휴대전화 : </span>
+                <input name="tel" type="tel">
+            </label>
+            <label class="add_tag2">
+                <span>관심 운동 : </span>
+                <select >
+                    <option value="">본인의 운동 선택</option>
+                    <option th:each="sports :${getSports}" th:value="${sports.getSpoNo()}" th:text="${sports.getSpoName()}">본인의 운동 선택</option>
+
+                </select>
+            </label>
+
+        </div>
+
+    </main>
+
+    <footer th:replace="footer :: footer"></footer>
+
+</div>
+</body>
+</html>
