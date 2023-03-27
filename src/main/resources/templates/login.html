@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link rel="stylesheet" href="/css/login.css">
-  <link rel="stylesheet" href="/css/reset.css">
-  <link rel="stylesheet" href="/css/reset2.css">
-  <link rel="stylesheet" href="/css/footer.css">
-  <link rel="stylesheet" href="/css/header.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/reset2.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/header.css">
 
 </head>
 <body>
 <div class="container">
-  <header th:replace="header :: header"></header>
+    <header th:replace="header :: header"></header>
 
-  <main class="login_main_con">
-    <div class="login_main_box">
-      <div class="login_img_box">
-        <a th:href="|/index/filter?sort=aaa&category=${category}|">asdsdsad</a>
-        <img src="">
-      </div>
-      <div class="login_text_box"></div>
-    </div>
+    <main class="login_main_con">
+        <div class="login_main_box">
+            <div class="login_img_box">
+                <img src="/SportTeam/loginImg.jpg">
+            </div>
+            <div class="login_text_box">
+                <label>
+                    <span>ID :</span>
+                    <input name="Email" type="text">
+                </label>
+                <label>
+                    <span>Pass :</span>
+                    <input name="Password" type="password">
+                </label>
+                <button type="submit" class="login_btn">로그인</button>
+                <a href="#" class="add_member_move">회원 가입</a>
+                <a href="#" class="find_member_move">아이디 / 비밀번호 찾기</a>
+                <img src="/SportTeam/NaverBtn.png">
+                <img src="/SportTeam/KakaoBtn.png">
+                <img src="/SportTeam/GoogleBtn.png">
 
-  </main>
 
-  <footer th:replace="footer :: footer"> </footer>
+            </div>
+        </div>
+
+    </main>
+
+    <footer th:replace="footer :: footer"></footer>
 
 </div>
 </body>
