@@ -2,7 +2,7 @@ package com.study.oAuth;
 
 import java.util.Map;
 
-public class NaverUserInfo implements OAuth2UserInfo{
+public class NaverUserInfo implements OAuth2UserInfo {
     private Map<String, Object> attributes; //OAuth2User.getAttributes();
     private Map<String, Object> attributesResponse;
 
@@ -29,10 +29,13 @@ public class NaverUserInfo implements OAuth2UserInfo{
     @Override
     public String getEmail() {
         return attributesResponse.get("email").toString();
-    }
 
+    }
     @Override
     public String getName() {
         return attributesResponse.get("name").toString();
+
     }
+
+
 }

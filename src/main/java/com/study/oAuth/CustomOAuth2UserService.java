@@ -36,7 +36,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
             oAuth2UserInfo = new KakaoUserInfo(oAuth2User.getAttributes());
         }
 
-        String username = oAuth2UserInfo.getName();
+        String userName = oAuth2UserInfo.getName();
 
         String uuid = UUID.randomUUID().toString().substring(0, 6);
         String pwd = passwordEncoder.encode("패스워드"+uuid);
@@ -46,7 +46,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
         User byUsername = userRepository.findByEmail(email).orElse(null);
         //DB에 없는 사용자라면 회원가입처리
         if(byUsername == null){
-            byUsername=User.builder().name(username).password(pwd).email(email).role(role).build();
+            byUsername=User.builder().name(userName).password(pwd).email(email).role(role).build();
             userRepository.save(byUsername);
         }
 

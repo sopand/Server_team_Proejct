@@ -22,7 +22,6 @@ public class UserRequest {
     private String password;
     private String passwordCheck;
 
-    private String tel;
     private Long sportNo;
 
     private String sportTimeFrom;
@@ -37,7 +36,6 @@ public class UserRequest {
                 .name(name)
                 .email(email)
                 .password(password)
-                .tel(tel)
                 .sport(setSportId)
                 .sportTimeFrom(formatter.parse(sportTimeFrom))
                 .sportTimeUntil(formatter.parse(sportTimeUntil))

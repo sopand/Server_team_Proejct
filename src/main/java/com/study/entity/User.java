@@ -21,7 +21,6 @@ public class User extends BaseTimeEntity{
     private String name;
     private String email;
     private String password;
-    private String tel;
     private int age;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "spo_no")

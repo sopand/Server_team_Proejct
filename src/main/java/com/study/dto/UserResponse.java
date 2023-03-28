@@ -13,7 +13,6 @@ public class UserResponse {
     private String nickname;
     private String email;
     private String password;
-    private String tel;
     private int age;
     private Long spoNo;
     private Date sportTimeFrom;
@@ -27,7 +26,6 @@ public class UserResponse {
         this.nickname=entity.getNickname();
         this.email= entity.getEmail();
         this.password= entity.getPassword();
-        this.tel= entity.getTel();
         this.age= entity.getAge();
         this.spoNo=entity.getSport().getSpoNo();
         this.sportTimeFrom=entity.getSportTimeFrom();
