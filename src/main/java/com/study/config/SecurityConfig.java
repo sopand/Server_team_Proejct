@@ -42,11 +42,15 @@ public class SecurityConfig {
                 .usernameParameter("email") // default= Username 파라미터로 넘어오는 값의 이름을 설정
                 .passwordParameter("password")// default =Password
                 .defaultSuccessUrl("/index",true) // 로그인 성공시 이동하는 페이지
+                .and().logout()
+                .logoutUrl("/users/logout") // 로그아웃 처리 URL, default: /logout, 원칙적으로 post 방식만 지원
+                .logoutSuccessUrl("/index") // 로그아웃 성공 후 이동페이지
                 .permitAll().and()
                 .oauth2Login().loginPage("/users/login")
                 .defaultSuccessUrl("/index", true)
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
+
         return http.build();
     }
 
