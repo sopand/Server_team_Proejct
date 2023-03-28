@@ -11,12 +11,20 @@ import java.text.SimpleDateFormat;
 @Data
 public class UserRequest {
     private String nickname;
+
+
     private String name;
+
     private String email;
+
+    private int age;
+
     private String password;
     private String passwordCheck;
+
     private String tel;
     private Long sportNo;
+
     private String sportTimeFrom;
 
     private String sportTimeUntil;

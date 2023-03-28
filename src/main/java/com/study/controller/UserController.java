@@ -4,6 +4,7 @@ import com.study.dto.SportResponse;
 import com.study.dto.UserRequest;
 import com.study.service.SportService;
 import com.study.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,6 +30,13 @@ public class UserController {
     public String LoginForm(){
 
         return "login";
+    }
+
+    @PostMapping("/users/login")
+    public String Login(UserRequest userRequest){
+        System.out.println("확인용"+userRequest);
+        userService.login(userRequest);
+        return "index";
     }
 
     /**

@@ -24,6 +24,7 @@ public class User extends BaseTimeEntity {
     private String email;
     private String password;
     private String tel;
+    private int age;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "spo_no")
     private Sport sport;
@@ -39,8 +40,6 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public void encodePassword(BCryptPasswordEncoder passwordEncoder){
-        this.password = passwordEncoder.encode(password);
-    }
+
 
 }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -31,18 +32,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain StudentFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
         http.authorizeHttpRequests()
                 .requestMatchers("/**")
                 .permitAll();
-        http.formLogin().loginPage("/users")
-                .loginProcessingUrl("/users")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .loginProcessingUrl("/index")
-                .failureUrl("/users/login")
-                .defaultSuccessUrl("/index", true)
-        ;
+        http.formLogin().disable()
+                .httpBasic().disable()
+                .cors().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                ;
         return http.build();
     }
 
