@@ -4,16 +4,13 @@ import com.study.dto.SportResponse;
 import com.study.dto.UserRequest;
 import com.study.service.SportService;
 import com.study.service.UserService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.text.ParseException;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,13 +25,11 @@ public class UserController {
      */
     @GetMapping("/users/login")
     public String LoginForm(){
-
         return "login";
     }
 
     @PostMapping("/users/login")
     public String Login(UserRequest userRequest){
-        System.out.println("확인용"+userRequest);
         return "index";
     }
 
@@ -49,7 +44,6 @@ public class UserController {
         model.addAttribute("getSports",getSports);
         return "adduser";
     }
-
     @PostMapping("/users")
     public String createUser(UserRequest userRequest) throws Exception {
         userService.createUser(userRequest);

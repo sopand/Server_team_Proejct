@@ -3,16 +3,20 @@ package com.study.service;
 import com.study.dto.UserRequest;
 import com.study.entity.User;
 import com.study.entity.UserRepository;
+import com.study.oAuth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService  implements UserDetailsService {
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
 
+    private BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 
 
     public Long createUser(UserRequest userRequest) throws Exception {
@@ -28,8 +32,11 @@ public class UserService {
     }
 
 
-
-
-
-
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        userRepository.findByEmail(email)
+                .map(entity-> new PrincipalDetails(entity))
+                .orElseThrow(()->new UsernameNotFoundException("아이디가 존재하지 않아요"));
+        return null;
+    }
 }

@@ -51,7 +51,7 @@ spring:
     ansi:
       enabled: always
 server:
-  port: '8092'
+  port: '8091'
 logging:
   level:
     org:
@@ -87,7 +87,7 @@ spring:
       password: '1111'
       username: root
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+      jdbc-url: jdbc:mysql://localhost:3306/sport?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
       connection-test-query: SELECT NOW() FROM dual
 
 ---

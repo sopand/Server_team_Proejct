@@ -9,7 +9,7 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class User extends BaseTimeEntity{
 
 
@@ -36,8 +36,9 @@ public class User extends BaseTimeEntity{
     private Date sportTimeUntil;
 
 
-
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
 
 }

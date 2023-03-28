@@ -18,8 +18,6 @@ import java.util.UUID;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
 
     private final UserRepository userRepository;
-
-
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -45,7 +43,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
 
         String email = oAuth2UserInfo.getEmail();	//수정
         Role role = Role.ROLE_USER;
-        User byUsername = userRepository.findByEmail(email).get();
+        User byUsername = userRepository.findByEmail(email).orElse(null);
         //DB에 없는 사용자라면 회원가입처리
         if(byUsername == null){
             byUsername=User.builder().name(username).password(pwd).email(email).role(role).build();
