@@ -1,4 +1,4 @@
-package com.study.jwt;
+package com.study.entity;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

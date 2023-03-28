@@ -1,9 +1,7 @@
 package com.study.entity;
 
-import com.study.jwt.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Date;
 
@@ -12,7 +10,7 @@ import java.util.Date;
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseTimeEntity {
+public class User extends BaseTimeEntity{
 
 
     @Id
@@ -37,9 +35,9 @@ public class User extends BaseTimeEntity {
     @Column(name = "sport_time_until")
     private Date sportTimeUntil;
 
+
+
     @Enumerated(EnumType.STRING)
     private Role role;
-
-
 
 }

@@ -1,6 +1,5 @@
 package com.study.dto;
 
-import com.study.entity.Role;
 import com.study.entity.Sport;
 import com.study.entity.User;
 import lombok.Data;

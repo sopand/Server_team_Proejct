@@ -35,7 +35,6 @@ public class UserController {
     @PostMapping("/users/login")
     public String Login(UserRequest userRequest){
         System.out.println("확인용"+userRequest);
-        userService.login(userRequest);
         return "index";
     }
 
