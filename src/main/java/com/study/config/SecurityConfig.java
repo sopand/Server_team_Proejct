@@ -35,7 +35,13 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers("/**")
                 .permitAll();
-        http.formLogin().disable()
+        http.formLogin().loginPage("/users")
+                .loginProcessingUrl("/users")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .loginProcessingUrl("/index")
+                .failureUrl("/users/login")
+                .and()
                 .oauth2Login().loginPage("/users")
                 .defaultSuccessUrl("/index", true)
                 .userInfoEndpoint();
