@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public String createUser(UserRequest userRequest) throws ParseException {
+    public String createUser(UserRequest userRequest) throws Exception {
         userService.createUser(userRequest);
         return"redirect:/users/login";
     }

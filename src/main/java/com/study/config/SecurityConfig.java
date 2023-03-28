@@ -41,10 +41,8 @@ public class SecurityConfig {
                 .passwordParameter("password")
                 .loginProcessingUrl("/index")
                 .failureUrl("/users/login")
-                .and()
-                .oauth2Login().loginPage("/users")
                 .defaultSuccessUrl("/index", true)
-                .userInfoEndpoint();
+        ;
         return http.build();
     }
 

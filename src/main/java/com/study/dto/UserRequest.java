@@ -1,5 +1,6 @@
 package com.study.dto;
 
+import com.study.entity.Role;
 import com.study.entity.Sport;
 import com.study.entity.User;
 import lombok.Data;
@@ -13,6 +14,7 @@ public class UserRequest {
     private String name;
     private String email;
     private String password;
+    private String passwordCheck;
     private String tel;
     private Long sportNo;
     private String sportTimeFrom;
@@ -31,6 +33,7 @@ public class UserRequest {
                 .sport(setSportId)
                 .sportTimeFrom(formatter.parse(sportTimeFrom))
                 .sportTimeUntil(formatter.parse(sportTimeUntil))
+                .role(Role.ROLE_USER)
                 .build();
     }
 }

@@ -57,7 +57,9 @@ logging:
     org:
       springframework:
         web: DEBUG
-      hibernate: DEBUG
+      hibernate:
+        SQL: debug
+        type: trace
 file:
   Upfolder: file:///ImgList/SportTeam/
   Upimg: C:/ImgList/SportTeam/
