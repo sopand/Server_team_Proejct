@@ -68,8 +68,9 @@
 
             <button class="adduser_btn">회원 등록 완료</button>
 
-        </form>
-
+        </form>0
+        <input type="hidden"  th:value="${user.sportTimeFrom}" th:if="${user}!=null" class="beFrom">
+        <input type="hidden" th:value="${user.sportTimeUntil}" th:if="${user}!=null" class="beUntil">
         <form class="adduser_main_box" action="/users" th:method="PUT" th:if="${user}!=null">
             <label class="add_tag1">
                 <span>이메일 : </span>
@@ -85,15 +86,15 @@
             </label>
             <label class="add_tag1">
                 <span>닉네임 : </span>
-                <input name="nickname" type="text">
+                <input name="nickname" type="text" th:value="${user.nickname}">
             </label>
             <label class="add_tag1">
                 <span>본명 : </span>
-                <input name="name" type="text">
+                <input name="name" type="text" th:value="${user.name}">
             </label>
             <label class="add_tag1">
                 <span>나이 : </span>
-                <select name="age">
+                <select name="age" th:value="${user.age}">
 
                 </select>
             </label>
@@ -101,18 +102,19 @@
                 <span>관심 운동 : </span>
                 <select name="sportNo">
                     <option value="">본인의 운동 선택</option>
-                    <option th:each="sports :${getSports}" th:value="${sports.getSpoNo()}" th:text="${sports.getSpoName()}">본인의 운동 선택</option>
+                    <option th:each="sports :${getSports}" th:value="${sports.getSpoNo()}" th:text="${sports.getSpoName()}"  th:selected="${sports.getSpoNo()} == ${user.spoNo}">본인의 운동 선택</option>
                     <option value="기타">기타</option>
                 </select>
             </label>
             <div class="add_tag2">
                 <span>주 운동 시간대 : </span>
                 <div class="tag_time">
-                    <select name="sportTimeFrom">
+
+                    <select name="sportTimeFrom" id="FromTime">
 
                     </select>
                     에서
-                    <select name="sportTimeUntil">
+                    <select name="sportTimeUntil" id="UntilTime">
 
                     </select>
                     까지

@@ -14,7 +14,7 @@ public class SportService {
     private final SportRepository sportRepository;
 
     public List<SportResponse> findSports(){
-        return sportRepository.findAll().stream().map(SportResponse::new).toList();
+        return sportRepository.findAllByOrderBySpoNoAsc().stream().map(SportResponse::new).toList();
     }
 
 }
