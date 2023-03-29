@@ -56,7 +56,7 @@ public class UserRequest {
                 .sportTimeFrom(toDateChanger(sportTimeFrom))
                 .sportTimeUntil(toDateChanger(sportTimeUntil))
                 .role(Role.ROLE_USER)
-                .oauthCheck(oAuthChk.NO_OAUTH_USER.getStatus())
+                .oauthMemberCheck(oAuthChk.NO_OAUTH_USER.getStatus())
                 .build();
     }
 

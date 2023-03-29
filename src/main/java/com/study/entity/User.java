@@ -42,8 +42,8 @@ public class User extends BaseTimeEntity{
 
     private String message;
 
-    @Column(name="oauth_check")
-    private String oauthCheck;
+    @Column(name="oauth_member_check")
+    private String oauthMemberCheck;
 
 
 
@@ -59,9 +59,8 @@ public class User extends BaseTimeEntity{
         if(request.getSportTimeUntil()!=null){
             this.sportTimeFrom=request.toDateChanger(request.getSportTimeFrom());
         }
-        if(oauthCheck.equals(oAuthChk.OAUTH_USER.getStatus())){
-            this.oauthCheck=oAuthChk.OAUTH_USER_PASSWORD_ON.getStatus();
+        if(oauthMemberCheck.equals(oAuthChk.OAUTH_USER.getStatus())){
+            this.oauthMemberCheck=oAuthChk.OAUTH_USER_PASSWORD_ON.getStatus();
         }
     }
-
 }

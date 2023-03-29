@@ -31,9 +31,9 @@ public class UserService implements UserDetailsService {
         Optional<User> getUser = userRepository.findByEmail(email);
         if (getUser.isPresent() == false) {
             throw new UsernameNotFoundException("해당 이메일은 등록되어있지 않습니다.");
-        } else {
-            return new PrincipalDetails(getUser.get());
         }
+        return new PrincipalDetails(getUser.get());
+
 
     }
 
@@ -43,9 +43,7 @@ public class UserService implements UserDetailsService {
         if (userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
             throw new Exception("이미 존재하는 이메일 입니다.");
         }
-        if (!userRequest.getPassword().equals(userRequest.getPasswordCheck())) {
-            throw new Exception("비밀번호가 일치하지 않아요");
-        }
+        PasswordCheck(userRequest);
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         User user = userRepository.save(userRequest.toCreateUserEntity());
         return user.getNo();
@@ -60,10 +58,9 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void modifyUser(UserRequest userRequest) throws Exception {
         User user = userRepository.findByEmail(userRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("해당하는 이메일이 없는걸요??"));
-        if (!userRequest.getPassword().equals(userRequest.getPasswordCheck())) {
-            throw new Exception("새 비밀빈호와 새 비밀번호 확인 값이 달라요!!");
-        }
-        if(user.getOauthCheck().equals(oAuthChk.OAUTH_USER.getStatus())){
+        PasswordCheck(userRequest);
+
+        if (user.getOauthMemberCheck().equals(oAuthChk.OAUTH_USER.getStatus())) {
             user.updateUser(userRequest);
             return;
         }
@@ -74,5 +71,11 @@ public class UserService implements UserDetailsService {
         user.updateUser(userRequest);
     }
 
+    public static void PasswordCheck(UserRequest userRequest) throws Exception {
+        if (!userRequest.getPassword().equals(userRequest.getPasswordCheck())) {
+            throw new Exception("입력한 비밀번호와 비밀번호 확인 값이 틀립니다.");
+        }
+    }
 
 }
+
