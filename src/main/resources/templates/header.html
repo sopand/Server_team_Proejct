@@ -13,7 +13,7 @@
 
         <form action="/users/logout" method="post" class="logout_form" sec:authorize="isAuthenticated()">
             <span th:text="|${#authentication.name}님 로그인|" ></span>
-            <a href="#">내 정보</a>
+            <a href="/users/detail">내 정보</a>
             <button>로그아웃</button>
         </form>
 

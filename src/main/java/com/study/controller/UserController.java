@@ -2,6 +2,7 @@ package com.study.controller;
 
 import com.study.dto.SportResponse;
 import com.study.dto.UserRequest;
+import com.study.dto.UserResponse;
 import com.study.service.SportService;
 import com.study.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -18,6 +20,9 @@ public class UserController {
 
     private final SportService sportService;
     private final UserService userService;
+
+
+
 
     /**
      * 사용자의 로그인을 위한 View 페이지로 이동시켜주는 맵핑,
@@ -44,10 +49,27 @@ public class UserController {
         model.addAttribute("getSports",getSports);
         return "adduser";
     }
+
+    /**
+     * 회원의 아이디를 생성하기 위한 기능을 하는 맵핑,
+     * @param userRequest  = 사용자가 회원 등록을 하기위해 입력한 여러 데이터들이 모여있는 Request객체,
+     * @return = 회원가입 완료후 이동할 View페이지의 이름,
+     * @throws Exception
+     */
     @PostMapping("/users")
     public String createUser(UserRequest userRequest) throws Exception {
         userService.createUser(userRequest);
         return"redirect:/users/login";
+    }
+
+    @GetMapping("/users/detail")
+    public String UserUpdateForm(Principal principal,Model model){
+        String email=principal.getName();
+        UserResponse getUser=userService.findUserByEmail(email);
+        List<SportResponse> getSports=sportService.findSports();
+        model.addAttribute("getSports",getSports);
+        model.addAttribute("user",getUser);
+        return "adduser";
     }
 
 

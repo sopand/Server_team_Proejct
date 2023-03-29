@@ -1,6 +1,7 @@
 package com.study.service;
 
 import com.study.dto.UserRequest;
+import com.study.dto.UserResponse;
 import com.study.entity.User;
 import com.study.entity.UserRepository;
 import com.study.oAuth.PrincipalDetails;
@@ -10,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +21,19 @@ public class UserService  implements UserDetailsService {
     private final UserRepository userRepository;
 
     private BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("이메일 "+email);
+        Optional<User> getUser=userRepository.findByEmail(email);
+        if(getUser.isPresent()==false){
+            throw new UsernameNotFoundException("해당 이메일은 등록되어있지 않습니다.");
+        }else{
+            return new PrincipalDetails(getUser.get());
+        }
+
+    }
+
 
 
     public Long createUser(UserRequest userRequest) throws Exception {
@@ -32,11 +49,9 @@ public class UserService  implements UserDetailsService {
     }
 
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        userRepository.findByEmail(email)
-                .map(entity-> new PrincipalDetails(entity))
-                .orElseThrow(()->new UsernameNotFoundException("아이디가 존재하지 않아요"));
-        return null;
+
+    @Transactional(readOnly = true)
+    public UserResponse findUserByEmail(String email){
+        return userRepository.findByEmail(email).map(UserResponse::new).orElseThrow();
     }
 }

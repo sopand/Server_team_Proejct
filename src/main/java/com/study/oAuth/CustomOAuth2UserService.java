@@ -1,6 +1,7 @@
 package com.study.oAuth;
 
 import com.study.entity.Role;
+import com.study.entity.Sport;
 import com.study.entity.User;
 import com.study.entity.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,9 +45,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
         String email = oAuth2UserInfo.getEmail();	//수정
         Role role = Role.ROLE_USER;
         User byUsername = userRepository.findByEmail(email).orElse(null);
-        //DB에 없는 사용자라면 회원가입처리
+        Sport sportNo=Sport.builder().spoNo(1L).build();
+
         if(byUsername == null){
-            byUsername=User.builder().name(userName).password(pwd).email(email).role(role).build();
+            byUsername=User.builder().name(userName).sport(sportNo).password(pwd).email(email).role(role).build();
             userRepository.save(byUsername);
         }
 

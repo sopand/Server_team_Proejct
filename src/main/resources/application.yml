@@ -89,7 +89,8 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://localhost:3306/sport?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
       connection-test-query: SELECT NOW() FROM dual
-
+server:
+  port: '8092'
 ---
 
 
