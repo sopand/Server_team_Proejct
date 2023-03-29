@@ -47,10 +47,11 @@ public class User extends BaseTimeEntity{
 
 
 
-    public void updateUser(UserRequest request) throws Exception {
+
+
+    public void CommonUserUpdate(UserRequest request) throws Exception {
         this.nickname=request.getNickname();
         this.name=request.getName();
-        this.password=request.getPassword();
         this.age=request.getAge();
         this.sport=request.toSportEntityChange();
         if(request.getSportTimeFrom()!=null){
@@ -59,8 +60,16 @@ public class User extends BaseTimeEntity{
         if(request.getSportTimeUntil()!=null){
             this.sportTimeFrom=request.toDateChanger(request.getSportTimeFrom());
         }
+    }
+
+    public void oAuthUserUpdate(UserRequest request) throws Exception{
+        CommonUserUpdate(request);
         if(oauthMemberCheck.equals(oAuthChk.OAUTH_USER.getStatus())){
             this.oauthMemberCheck=oAuthChk.OAUTH_USER_PASSWORD_ON.getStatus();
         }
+    }
+    public void updateUser(UserRequest request) throws Exception {
+        this.password=request.getPassword();
+        CommonUserUpdate(request);
     }
 }

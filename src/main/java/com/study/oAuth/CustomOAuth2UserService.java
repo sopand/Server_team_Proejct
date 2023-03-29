@@ -45,7 +45,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
         Sport sportNo=Sport.builder().spoNo(1L).build();
 
         if(byUsername == null){
-            byUsername=User.builder().name(userName).sport(sportNo).password(pwd).email(email).role(role).oauthCheck(oAuthChk.OAUTH_USER.getStatus()).build();
+            byUsername=User.builder().name(userName).sport(sportNo).password(pwd).email(email).role(role).oauthMemberCheck(oAuthChk.OAUTH_USER.getStatus()).build();
             userRepository.save(byUsername);
         }
 

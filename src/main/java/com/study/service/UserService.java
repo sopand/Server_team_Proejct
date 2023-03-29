@@ -58,15 +58,15 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void modifyUser(UserRequest userRequest) throws Exception {
         User user = userRepository.findByEmail(userRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("해당하는 이메일이 없는걸요??"));
-        PasswordCheck(userRequest);
 
         if (user.getOauthMemberCheck().equals(oAuthChk.OAUTH_USER.getStatus())) {
-            user.updateUser(userRequest);
+            user.oAuthUserUpdate(userRequest);
             return;
         }
         if (!passwordEncoder.matches(userRequest.getBeforePassword(), user.getPassword())) {
             throw new Exception("인증을 위한 기존 비밀번호가 일치하지 않습니다.");
         }
+        PasswordCheck(userRequest);
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         user.updateUser(userRequest);
     }
@@ -76,6 +76,7 @@ public class UserService implements UserDetailsService {
             throw new Exception("입력한 비밀번호와 비밀번호 확인 값이 틀립니다.");
         }
     }
+
 
 }
 

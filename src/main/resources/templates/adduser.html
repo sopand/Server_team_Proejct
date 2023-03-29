@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/header.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/adduser.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
 </head>
 <body>
 <div class="container">
@@ -71,16 +72,18 @@
         </form>
         <input type="hidden"  th:value="${user.sportTimeFrom}" th:if="${user}!=null" class="beFrom">
         <input type="hidden" th:value="${user.sportTimeUntil}" th:if="${user}!=null" class="beUntil">
+
         <form class="adduser_main_box" action="/users" th:method="PUT" th:if="${user}!=null">
             <label class="add_tag1">
                 <span>이메일 : </span>
                 <input name="email" type="email"  th:value="${user.email}" readonly>
             </label>
-            <label class="add_tag1" th:if="${user.oauthCheck}!='Y'">
+            <th:block th:if="${user.oauthMemberCheck}!='Y'">
+            <label class="add_tag1" >
                 <span>기존 비밀번호: </span>
                 <input name="beforePassword" type="password">
             </label>
-            <label class="add_tag1">
+            <label class="add_tag1" >
                 <span>새비밀번호 : </span>
                 <input name="password" type="password">
             </label>
@@ -88,6 +91,7 @@
                 <span>새비밀번호 확인 : </span>
                 <input name="passwordCheck" type="password">
             </label>
+            </th:block>
             <label class="add_tag1">
                 <span>닉네임 : </span>
                 <input name="nickname" type="text" th:value="${user.nickname}">
@@ -125,7 +129,7 @@
                 </div>
             </div>
 
-            <button class="adduser_btn">정보 수정 완료</button>
+            <button class="adduser_btn modify_user_btn">정보 수정 완료</button>
 
         </form>
 
