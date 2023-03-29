@@ -42,7 +42,8 @@ public class User extends BaseTimeEntity{
 
 
 
-    public void updateUser(UserRequest request) throws ParseException {
+    public void updateUser(UserRequest request) throws Exception {
+
         this.nickname=request.getNickname();
         this.name=request.getName();
         this.password=request.getPassword();

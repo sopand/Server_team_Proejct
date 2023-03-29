@@ -13,51 +13,61 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 @Service
 @RequiredArgsConstructor
-public class UserService  implements UserDetailsService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
-    private BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        System.out.println("이메일 "+email);
-        Optional<User> getUser=userRepository.findByEmail(email);
-        if(getUser.isPresent()==false){
+        Optional<User> getUser = userRepository.findByEmail(email);
+        if (getUser.isPresent() == false) {
             throw new UsernameNotFoundException("해당 이메일은 등록되어있지 않습니다.");
-        }else{
+        } else {
             return new PrincipalDetails(getUser.get());
         }
 
     }
 
 
-
+    @Transactional
     public Long createUser(UserRequest userRequest) throws Exception {
-        if(userRepository.findByEmail(userRequest.getEmail()).isPresent()){
+        if (userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
             throw new Exception("이미 존재하는 이메일 입니다.");
         }
-        if(!userRequest.getPassword().equals(userRequest.getPasswordCheck())){
+        if (!userRequest.getPassword().equals(userRequest.getPasswordCheck())) {
             throw new Exception("비밀번호가 일치하지 않아요");
         }
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        User user=userRepository.save(userRequest.toCreateUserEntity());
+        User user = userRepository.save(userRequest.toCreateUserEntity());
         return user.getNo();
     }
 
 
-
     @Transactional(readOnly = true)
-    public UserResponse findUserByEmail(String email){
+    public UserResponse findUserByEmail(String email) {
         return userRepository.findByEmail(email).map(UserResponse::new).orElseThrow();
     }
 
-    public void modifyUser(UserRequest userRequest){
-        User user=userRepository.findByEmail(userRequest.getEmail()).orElseThrow(()->new UsernameNotFoundException("해당하는 이메일값이 없는걸요??"));
-        
+    @Transactional
+    public void modifyUser(UserRequest userRequest) throws Exception {
+        User user = userRepository.findByEmail(userRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("해당하는 이메일값이 없는걸요??"));
+        if (!userRequest.getPassword().equals(userRequest.getPasswordCheck())) {
+            throw new Exception("새 비밀빈호와 새 비밀번호 확인 값이 달라요!!");
+        }
+        if (passwordEncoder.matches(userRequest.getBeforePassword(), user.getPassword())) {
+            userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+            user.updateUser(userRequest);
+        } else {
+            throw new Exception("인증을 위한 기존 비밀번호가 일치하지 않습니다.");
+        }
+        user.updateUser(userRequest);
     }
 }

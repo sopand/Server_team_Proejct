@@ -83,7 +83,7 @@ public class UserController {
 
 
     @PutMapping("/users")
-    public String modifyUser(UserRequest userRequest){
+    public String modifyUser(UserRequest userRequest) throws Exception {
         userService.modifyUser(userRequest);
         return "redirect:/index";
     }
