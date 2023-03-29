@@ -4,6 +4,7 @@ import com.study.dto.UserRequest;
 import com.study.dto.UserResponse;
 import com.study.entity.User;
 import com.study.entity.UserRepository;
+import com.study.entity.oAuthChk;
 import com.study.oAuth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -58,16 +59,20 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void modifyUser(UserRequest userRequest) throws Exception {
-        User user = userRepository.findByEmail(userRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("해당하는 이메일값이 없는걸요??"));
+        User user = userRepository.findByEmail(userRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("해당하는 이메일이 없는걸요??"));
         if (!userRequest.getPassword().equals(userRequest.getPasswordCheck())) {
             throw new Exception("새 비밀빈호와 새 비밀번호 확인 값이 달라요!!");
         }
-        if (passwordEncoder.matches(userRequest.getBeforePassword(), user.getPassword())) {
-            userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        if(user.getOauthCheck().equals(oAuthChk.OAUTH_USER.getStatus())){
             user.updateUser(userRequest);
-        } else {
+            return;
+        }
+        if (!passwordEncoder.matches(userRequest.getBeforePassword(), user.getPassword())) {
             throw new Exception("인증을 위한 기존 비밀번호가 일치하지 않습니다.");
         }
+        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         user.updateUser(userRequest);
     }
+
+
 }

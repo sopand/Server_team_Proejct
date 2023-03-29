@@ -19,6 +19,7 @@ public class UserResponse {
     private Date sportTimeUntil;
 
     private String role;
+    private String oauthCheck;
 
     public UserResponse(User entity){
         this.no=entity.getNo();
@@ -31,6 +32,7 @@ public class UserResponse {
         this.sportTimeFrom=entity.getSportTimeFrom();
         this.sportTimeUntil=entity.getSportTimeUntil();
         this.role=entity.getRole().name();
+        this.oauthCheck=entity.getOauthCheck();
     }
 
 }

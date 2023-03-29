@@ -76,7 +76,7 @@
                 <span>이메일 : </span>
                 <input name="email" type="email"  th:value="${user.email}" readonly>
             </label>
-            <label class="add_tag1">
+            <label class="add_tag1" th:if="${user.oauthCheck}!='Y'">
                 <span>기존 비밀번호: </span>
                 <input name="beforePassword" type="password">
             </label>

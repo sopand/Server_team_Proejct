@@ -1,9 +1,6 @@
 package com.study.oAuth;
 
-import com.study.entity.Role;
-import com.study.entity.Sport;
-import com.study.entity.User;
-import com.study.entity.UserRepository;
+import com.study.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -48,7 +45,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
         Sport sportNo=Sport.builder().spoNo(1L).build();
 
         if(byUsername == null){
-            byUsername=User.builder().name(userName).sport(sportNo).password(pwd).email(email).role(role).build();
+            byUsername=User.builder().name(userName).sport(sportNo).password(pwd).email(email).role(role).oauthCheck(oAuthChk.OAUTH_USER.getStatus()).build();
             userRepository.save(byUsername);
         }
 

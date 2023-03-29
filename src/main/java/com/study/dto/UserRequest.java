@@ -3,6 +3,7 @@ package com.study.dto;
 import com.study.entity.Role;
 import com.study.entity.Sport;
 import com.study.entity.User;
+import com.study.entity.oAuthChk;
 import lombok.Data;
 
 import java.text.ParseException;
@@ -37,13 +38,15 @@ public class UserRequest {
     }
 
     public Date toDateChanger(String beforeDate) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("kk:mm:ss");
-        return formatter.parse(beforeDate);
+        if(beforeDate!=null){
+            SimpleDateFormat formatter = new SimpleDateFormat("kk:mm:ss");
+            return formatter.parse(beforeDate);
+        }
+        return null;
+
     }
 
     public User toCreateUserEntity() throws ParseException {
-
-
         return User.builder()
                 .nickname(nickname)
                 .name(name)
@@ -53,6 +56,7 @@ public class UserRequest {
                 .sportTimeFrom(toDateChanger(sportTimeFrom))
                 .sportTimeUntil(toDateChanger(sportTimeUntil))
                 .role(Role.ROLE_USER)
+                .oauthCheck(oAuthChk.NO_OAUTH_USER.getStatus())
                 .build();
     }
 

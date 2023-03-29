@@ -40,17 +40,28 @@ public class User extends BaseTimeEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String message;
+
+    @Column(name="oauth_check")
+    private String oauthCheck;
+
 
 
     public void updateUser(UserRequest request) throws Exception {
-
         this.nickname=request.getNickname();
         this.name=request.getName();
         this.password=request.getPassword();
         this.age=request.getAge();
         this.sport=request.toSportEntityChange();
-        this.sportTimeUntil=request.toDateChanger(request.getSportTimeUntil());
-        this.sportTimeFrom=request.toDateChanger(request.getSportTimeFrom());
+        if(request.getSportTimeFrom()!=null){
+            this.sportTimeUntil=request.toDateChanger(request.getSportTimeUntil());
+        }
+        if(request.getSportTimeUntil()!=null){
+            this.sportTimeFrom=request.toDateChanger(request.getSportTimeFrom());
+        }
+        if(oauthCheck.equals(oAuthChk.OAUTH_USER.getStatus())){
+            this.oauthCheck=oAuthChk.OAUTH_USER_PASSWORD_ON.getStatus();
+        }
     }
 
 }
