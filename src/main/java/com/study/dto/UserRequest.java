@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Data
 public class UserRequest {
@@ -18,6 +19,7 @@ public class UserRequest {
     private String email;
 
     private int age;
+    private String beforePassword;
 
     private String password;
     private String passwordCheck;
@@ -26,21 +28,33 @@ public class UserRequest {
 
     private String sportTimeFrom;
 
+
     private String sportTimeUntil;
 
+    public Sport toSportEntityChange() {
+        return Sport.builder().spoNo(sportNo).build();
+    }
+
+    public Date toDateChanger(String beforeDate) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("kk:mm:ss");
+        return formatter.parse(beforeDate);
+    }
+
     public User toCreateUserEntity() throws ParseException {
-        Sport setSportId=Sport.builder().spoNo(sportNo).build();
-        SimpleDateFormat formatter =new SimpleDateFormat("kk:mm:ss");
+
+
         return User.builder()
                 .nickname(nickname)
                 .name(name)
                 .email(email)
                 .password(password)
-                .sport(setSportId)
-                .sportTimeFrom(formatter.parse(sportTimeFrom))
-                .sportTimeUntil(formatter.parse(sportTimeUntil))
+                .sport(toSportEntityChange())
+                .sportTimeFrom(toDateChanger(sportTimeFrom))
+                .sportTimeUntil(toDateChanger(sportTimeUntil))
                 .role(Role.ROLE_USER)
                 .build();
     }
+
+
 }
 

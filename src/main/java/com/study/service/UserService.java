@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @Service
 @RequiredArgsConstructor
@@ -53,5 +54,10 @@ public class UserService  implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserResponse findUserByEmail(String email){
         return userRepository.findByEmail(email).map(UserResponse::new).orElseThrow();
+    }
+
+    public void modifyUser(UserRequest userRequest){
+        User user=userRepository.findByEmail(userRequest.getEmail()).orElseThrow(()->new UsernameNotFoundException("해당하는 이메일값이 없는걸요??"));
+        
     }
 }

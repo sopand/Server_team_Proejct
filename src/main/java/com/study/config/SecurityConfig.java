@@ -32,7 +32,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain StudentFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf().disable()
+                .sessionManagement()
+                .sessionFixation().changeSessionId()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true);
+
         http.authorizeHttpRequests()
                 .requestMatchers("/**","/users/**")
                 .permitAll();
@@ -45,6 +50,9 @@ public class SecurityConfig {
                 .and().logout()
                 .logoutUrl("/users/logout") // 로그아웃 처리 URL, default: /logout, 원칙적으로 post 방식만 지원
                 .logoutSuccessUrl("/index") // 로그아웃 성공 후 이동페이지
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID", "remember-me")
                 .permitAll().and()
                 .oauth2Login().loginPage("/users/login")
                 .defaultSuccessUrl("/index", true)

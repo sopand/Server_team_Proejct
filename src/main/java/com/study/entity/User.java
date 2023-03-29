@@ -1,8 +1,10 @@
 package com.study.entity;
 
+import com.study.dto.UserRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.text.ParseException;
 import java.util.Date;
 
 @Entity
@@ -39,5 +41,15 @@ public class User extends BaseTimeEntity{
     private Role role;
 
 
+
+    public void updateUser(UserRequest request) throws ParseException {
+        this.nickname=request.getNickname();
+        this.name=request.getName();
+        this.password=request.getPassword();
+        this.age=request.getAge();
+        this.sport=request.toSportEntityChange();
+        this.sportTimeUntil=request.toDateChanger(request.getSportTimeUntil());
+        this.sportTimeFrom=request.toDateChanger(request.getSportTimeFrom());
+    }
 
 }

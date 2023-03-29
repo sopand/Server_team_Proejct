@@ -68,7 +68,7 @@
 
             <button class="adduser_btn">회원 등록 완료</button>
 
-        </form>0
+        </form>
         <input type="hidden"  th:value="${user.sportTimeFrom}" th:if="${user}!=null" class="beFrom">
         <input type="hidden" th:value="${user.sportTimeUntil}" th:if="${user}!=null" class="beUntil">
         <form class="adduser_main_box" action="/users" th:method="PUT" th:if="${user}!=null">
@@ -77,11 +77,15 @@
                 <input name="email" type="email"  th:value="${user.email}" readonly>
             </label>
             <label class="add_tag1">
-                <span>비밀번호 : </span>
+                <span>기존 비밀번호: </span>
+                <input name="email" type="email"  th:value="${user.email}" readonly>
+            </label>
+            <label class="add_tag1">
+                <span>새비밀번호 : </span>
                 <input name="password" type="password">
             </label>
             <label class="add_tag1">
-                <span>비밀번호 확인 : </span>
+                <span>새비밀번호 확인 : </span>
                 <input name="passwordCheck" type="password">
             </label>
             <label class="add_tag1">
@@ -109,7 +113,6 @@
             <div class="add_tag2">
                 <span>주 운동 시간대 : </span>
                 <div class="tag_time">
-
                     <select name="sportTimeFrom" id="FromTime">
 
                     </select>
@@ -122,7 +125,7 @@
                 </div>
             </div>
 
-            <button class="adduser_btn">회원 등록 완료</button>
+            <button class="adduser_btn">정보 수정 완료</button>
 
         </form>
 
