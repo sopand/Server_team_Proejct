@@ -6,12 +6,13 @@ import lombok.*;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Builder
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseTimeEntity{
 
 
@@ -45,11 +46,15 @@ public class User extends BaseTimeEntity{
     @Column(name="oauth_member_check")
     private String oauthMemberCheck;
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Board> board;
 
 
 
 
-    public void CommonUserUpdate(UserRequest request) throws Exception {
+
+
+    public void oAuthUserUpdate(UserRequest request) throws Exception{
         this.nickname=request.getNickname();
         this.name=request.getName();
         this.age=request.getAge();
@@ -61,15 +66,8 @@ public class User extends BaseTimeEntity{
             this.sportTimeFrom=request.toDateChanger(request.getSportTimeFrom());
         }
     }
-
-    public void oAuthUserUpdate(UserRequest request) throws Exception{
-        CommonUserUpdate(request);
-        if(oauthMemberCheck.equals(oAuthChk.OAUTH_USER.getStatus())){
-            this.oauthMemberCheck=oAuthChk.OAUTH_USER_PASSWORD_ON.getStatus();
-        }
-    }
-    public void updateUser(UserRequest request) throws Exception {
+    public void NormalUserUpdate(UserRequest request) throws Exception {
         this.password=request.getPassword();
-        CommonUserUpdate(request);
+        oAuthUserUpdate(request);
     }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/boardlist.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/reset2.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/header.css">
+
+</head>
+<body>
+<div class="container">
+    <header th:replace="header :: header"></header>
+
+    <main class="boardList_main_con">
+
+        <div class="boardList_btn_box">
+            <a href="#">게시글 등록</a>
+        </div>
+        <div class="boardList_main_box">
+            <ul class="boardList_content_top">
+                <li class="board_no">No</li>
+                <li class="board_name">제목</li>
+                <li class="board_writer">작성자</li>
+                <li class="board_createDate">날짜</li>
+                <li class="board_sport">종목</li>
+            </ul>
+            <ul class="boardList_content">
+                <li class="board_no">번호</li>
+                <li class="board_name">제목</li>
+                <li class="board_writer">아이디</li>
+                <li class="board_createDate">날짜</li>
+                <li class="board_sport">종목</li>
+            </ul>
+        </div>
+
+    </main>
+
+    <footer th:replace="footer :: footer"></footer>
+
+</div>
+</body>
+</html>

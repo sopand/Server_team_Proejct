@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -28,16 +29,9 @@ public class UserService implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> getUser = userRepository.findByEmail(email);
-        if (getUser.isPresent() == false) {
-            throw new UsernameNotFoundException("해당 이메일은 등록되어있지 않습니다.");
-        }
-        return new PrincipalDetails(getUser.get());
-
-
+        User user=userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("해당하는 이메일이 없는걸요??"));
+        return new PrincipalDetails(user);
     }
-
-
     @Transactional
     public Long createUser(UserRequest userRequest) throws Exception {
         if (userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
@@ -48,8 +42,6 @@ public class UserService implements UserDetailsService {
         User user = userRepository.save(userRequest.toCreateUserEntity());
         return user.getNo();
     }
-
-
     @Transactional(readOnly = true)
     public UserResponse findUserByEmail(String email) {
         return userRepository.findByEmail(email).map(UserResponse::new).orElseThrow();
@@ -68,7 +60,7 @@ public class UserService implements UserDetailsService {
         }
         PasswordCheck(userRequest);
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        user.updateUser(userRequest);
+        user.NormalUserUpdate(userRequest);
     }
 
     public static void PasswordCheck(UserRequest userRequest) throws Exception {
