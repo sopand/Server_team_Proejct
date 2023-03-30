@@ -35,6 +35,9 @@
     align-items: center;
     justify-content: flex-end;
     height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+
 }
 .boardAddTag1 input,.boardAddTag1 select{
     width:500px;
@@ -42,6 +45,9 @@
     border:1px solid #e2e2e2;
     border-radius: 5px;
     margin-left: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color:Gray;
 }
 .boardAddTag2 input{
     width:250px;
@@ -49,7 +55,7 @@
     border:1px solid #e2e2e2;
     border-radius: 5px;
     height: 50px;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
     color:Gray;
 
@@ -128,6 +134,9 @@
 .boardAddTag3 span{
     width: 150px;
     height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #4285F4;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -140,6 +149,7 @@
     font-size: 24px;
     font-weight: bold;
     color:#4285F4;
+    padding-left: 10px;
 }
 .boardAddbtn{
     width:400px;
@@ -154,7 +164,7 @@
 
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:1100px;display:flex;align-items:center;justify-content: center;height: 600px;margin-top:50px;}
+.map_wrap {position:relative;width:1100px;display:flex;align-items:center;justify-content: center;height: 600px;margin-bottom: 50px;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}

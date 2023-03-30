@@ -20,11 +20,16 @@
 <div class="container">
     <header th:replace="header :: header"></header>
 
-    <main class="boardAdd_main_con">
+    <form class="boardAdd_main_con" action="/boards" method="POST">
         <div class="boardAdd_main_box">
             <label class="boardAddTag1">
                 <span>제목 : </span>
                 <input name="boardName" placeholder="게시글 제목을 입력해주세요~!">
+            </label>
+
+            <label class="boardAddTag1">
+                <span>글쓴이 : </span>
+                <input name="email" th:value="${#authentication.name}" readonly>
             </label>
 
             <label class="boardAddTag2">
@@ -45,7 +50,7 @@
             </div>
             <label class="boardAddTag1">
                 <span>찾는 운동 : </span>
-                <select name="sportNo">
+                <select name="spoNo">
                     <option value="">파트너를 구하려는 운동 종목 선택</option>
                     <option th:each="sports :${getSports}" th:value="${sports.getSpoNo()}" th:text="${sports.getSpoName()}">본인의 운동 선택</option>
                     <option value="기타">기타</option>
@@ -62,36 +67,36 @@
 
 
         <span class="map_tag">약속 장소 지정</span>
-        <div class="map_wrap">
 
-            <div id="map"></div>
-            <div id="menu_wrap" class="bg_white">
-                <div class="option">
-                    <div>
-                        <form onsubmit="searchPlaces(); return false;">
-                            키워드 :
-                            <input type="text" value="이태원 맛집" id="keyword" size="15">
-                            <button type="submit">검색하기</button>
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <ul id="placesList"></ul>
-                <div id="pagination"></div>
-            </div>
-        </div>
 
         <input type="hidden" name="boardMapCordx">
         <input type="hidden" name="boardMapCordy">
+        <input type="hidden" name="imgList">
         <label class="boardAddTag3">
             <span>약속 장소 : </span>
-            <input type="text" name="boardMapName" class="board_map_name">
+            <input type="text" name="boardMapName" class="board_map_name" placeholder="지도에서 선택하면 자동 설정됩니다." readonly>
         </label>
 
+        <button type="button" class="boardAddbtn">게시물 등록완료</button>
+    </form>
+    <div class="map_wrap">
 
-
-        <button class="boardAddbtn">게시물 등록완료</button>
-    </main>
+        <div id="map"></div>
+        <div id="menu_wrap" class="bg_white">
+            <div class="option">
+                <div>
+                    <form onsubmit="searchPlaces(); return false;">
+                        키워드 :
+                        <input type="text" value="이태원 맛집" id="keyword" size="15">
+                        <button type="submit">검색하기</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <ul id="placesList"></ul>
+            <div id="pagination"></div>
+        </div>
+    </div>
 
     <footer th:replace="footer :: footer"></footer>
 
