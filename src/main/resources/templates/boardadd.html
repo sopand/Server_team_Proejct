@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/boardadd.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/reset2.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/boardadd.js}"></script>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed54528b2732a15c5f14217345300d6"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+
+
+</head>
+<body>
+<div class="container">
+    <header th:replace="header :: header"></header>
+
+    <main class="boardAdd_main_con">
+        <div class="boardAdd_main_box">
+            <label class="boardAddTag1">
+                <span>제목 : </span>
+                <input name="boardName" placeholder="게시글 제목을 입력해주세요~!">
+            </label>
+
+            <label class="boardAddTag2">
+                <span>운동 날짜 : </span>
+                <input name="boardDay" placeholder="게시글 제목을 입력해주세요~!" type="date">
+            </label>
+            <div class="boardAddTag2">
+                <span>운동 시간: </span>
+                <div class="tag_time">
+                    <select name="boardPromiseFrom">
+                    </select>
+                    에서
+                    <select name="boardPromiseUntil">
+                    </select>
+                    까지
+
+                </div>
+            </div>
+            <label class="boardAddTag1">
+                <span>찾는 운동 : </span>
+                <select name="sportNo">
+                    <option value="">파트너를 구하려는 운동 종목 선택</option>
+                    <option th:each="sports :${getSports}" th:value="${sports.getSpoNo()}" th:text="${sports.getSpoName()}">본인의 운동 선택</option>
+                    <option value="기타">기타</option>
+                </select>
+            </label>
+            <div id="map">
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+    <footer th:replace="footer :: footer"></footer>
+
+</div>
+<script src="/js/map.js">
+
+</script>
+</body>
+</html>
