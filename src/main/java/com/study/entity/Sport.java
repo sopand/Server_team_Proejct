@@ -20,7 +20,7 @@ public class Sport {
     @Column(name = "spo_name")
     private String spoName;
 
-
+    private String spoCategory;
     @OneToMany(mappedBy = "sport",cascade = CascadeType.ALL)
     private List<User> user;
 
