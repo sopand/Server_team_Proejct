@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/header.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
     <script type="text/javascript" th:src="@{/js/boardadd.js}"></script>
 
@@ -54,7 +55,15 @@
         </div>
 
 
+        <div class="editorBox">
+            <span class="editorTag"> 게시글 내용 입력</span>
+            <textarea name="boardContent" id="editor"></textarea>
+        </div>
+
+
+        <span class="map_tag">약속 장소 지정</span>
         <div class="map_wrap">
+
             <div id="map"></div>
             <div id="menu_wrap" class="bg_white">
                 <div class="option">
@@ -72,17 +81,24 @@
             </div>
         </div>
 
-        <input type="text" name="boardMapCordx">
-        <input type="text" name="boardMapCordy">
-        <input type="text" name="selectMap">
+        <input type="hidden" name="boardMapCordx">
+        <input type="hidden" name="boardMapCordy">
+        <label class="boardAddTag3">
+            <span>약속 장소 : </span>
+            <input type="text" name="boardMapName" class="board_map_name">
+        </label>
+
+
+
+        <button class="boardAddbtn">게시물 등록완료</button>
     </main>
 
     <footer th:replace="footer :: footer"></footer>
 
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed54528b2732a15c5f14217345300d6&libraries=services"></script>
-<script src="/js/map.js">
+<script src="/js/map.js"></script>
+<script src="/js/editor.js"></script>
 
-</script>
 </body>
 </html>

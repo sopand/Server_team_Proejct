@@ -86,7 +86,7 @@
                     displayInfowindow(marker, title);
                     $("input[name=boardMapCordx]").val(marker.getPosition().getLat());
                     $("input[name=boardMapCordy]").val(marker.getPosition().getLng());
-                    $("input[name=selectMap]").val(title);
+                    $("input[name=boardMapName]").val(title);
                 });
 
                 kakao.maps.event.addListener(marker, 'mouseout', function() {
@@ -94,8 +94,11 @@
                 });
 
 
-                itemEl.onmouseover =  function () {
+                itemEl.onclick =  function () {
                     displayInfowindow(marker, title);
+                    $("input[name=boardMapCordx]").val(marker.getPosition().getLat());
+                    $("input[name=boardMapCordy]").val(marker.getPosition().getLng());
+                    $("input[name=boardMapName]").val(title);
                 };
 
                 itemEl.onmouseout =  function () {
