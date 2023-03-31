@@ -77,3 +77,22 @@ $(function () {
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 });
+
+
+
+
+
+$(function (){
+    $(".groupAdd_btn").click(function (){
+        const email=$("input[name=email]").val();
+        const boardNo=$("input[name=boardNo]").val();
+        ajaxCall("/boards/club","POST",{email,boardNo},function (data)
+        {
+            if(data!=null){
+                alert("모임 참가신청 성공");
+            }
+        },function (){
+            alert("모임 참가 신청 에러 발생");
+        },)
+    });
+})

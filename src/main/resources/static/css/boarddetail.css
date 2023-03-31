@@ -53,7 +53,7 @@
     font-weight: bold;
 }
 .tag2_name{
-    width: 400px;
+    width: 500px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -63,7 +63,8 @@
     color:red;
 }
 .tag2_content{
-    width: 600px;
+    padding-left: 50px;
+    width: 500px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -79,6 +80,14 @@
     padding-left: 50px;
 }
 
+.groupAdd_btn{
+    width:300px;
+    background-color: #4285F4;
+    color:white;
+    font-weight: bold;
+    height: 50px;
+    margin:30px;
+}
 
 
 
