@@ -3,6 +3,7 @@ package com.study.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Board {
+public class Board{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,9 +34,12 @@ public class Board {
     private String boardName;
     private String boardContent;
 
-    @Temporal(TemporalType.DATE)
+    @Column(name = "board_promise_from")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date boardPromiseFrom;
-    @Temporal(TemporalType.DATE)
+
+    @Column(name = "board_promise_until")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date boardPromiseUntil;
 
     private String boardMapCordx;

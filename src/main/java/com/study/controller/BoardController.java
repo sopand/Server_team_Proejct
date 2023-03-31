@@ -1,6 +1,7 @@
 package com.study.controller;
 
 import com.study.dto.BoardRequest;
+import com.study.dto.BoardResponse;
 import com.study.dto.SportResponse;
 import com.study.service.BoardService;
 import com.study.service.ImgService;
@@ -23,7 +24,9 @@ public class BoardController {
     private final SportService sportService;
 
     @GetMapping("/boards/list")
-    public String findBoardList(Model model) {
+    public String findBoardList(Model model, BoardRequest boardRequest) {
+        List<BoardResponse> getAllBoards = boardService.findAllBoards();
+        model.addAttribute("board", getAllBoards);
         return "boardlist";
     }
 
@@ -41,4 +44,5 @@ public class BoardController {
         imgService.updateBoardNo(boardNo);
         return "redirect:/boards/list";
     }
+
 }

@@ -23,21 +23,27 @@
         <div class="boardList_btn_box">
             <a href="/boards">게시글 등록</a>
         </div>
-        <div class="boardList_main_box">
+        <div class="boardList_main_box" th:if="${!#lists.isEmpty(board)}">
             <ul class="boardList_content_top">
                 <li class="board_no">No</li>
                 <li class="board_name">제목</li>
+                <li class="board_sport">종목</li>
+                <li class="board_promiseDate">예정일</li>
                 <li class="board_writer">작성자</li>
-                <li class="board_createDate">날짜</li>
-                <li class="board_sport">종목</li>
+                <li class="board_createDate">작성일</li>
             </ul>
-            <ul class="boardList_content">
-                <li class="board_no">번호</li>
-                <li class="board_name">제목</li>
-                <li class="board_writer">아이디</li>
-                <li class="board_createDate">날짜</li>
-                <li class="board_sport">종목</li>
+            <ul class="boardList_content" th:each="board:${board}">
+                <li class="board_no" th:text="${board.boardNo}"></li>
+                <li class="board_name"><a href="/boards/detail" th:text="${board.boardName}"></a></li>
+                <li class="board_sport" th:text="${board.sport.spoName}"></li>
+                <li class="board_promiseDate" th:text="${board.boardPromiseFrom}"></li>
+                <li class="board_writer" th:text="${board.user.email}"></li>
+                <li class="board_createDate" th:text="${board.createDate}"></li>
             </ul>
+        </div>
+        <div class="boardList_main_box" th:if="${#lists.isEmpty(board)}">
+            <span>해당 페이지에 출력할 데이터가 존재하지않아요!!!</span>
+
         </div>
 
     </main>

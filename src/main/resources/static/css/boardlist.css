@@ -43,7 +43,7 @@
     padding-bottom: 50px;
 }
 .boardList_content_top,.boardList_content{
-    width:800px;
+    width:1100px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -62,30 +62,49 @@
     align-items: center;
     justify-content: center;
 }
+.board_name a{
+    width:250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:blue;
+}
 .boardList_content_top li,.boardList_content li{
     font-weight: bold;
     padding-bottom: 25px;
     color:gray;
     padding-top: 25px;
+    font-size: 14px;
 }
-.boardList_content_top li{
-}
+
 .board_writer{
-    width: 150px;
+    width: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
-.board_createDate{
+.board_createDate,.board_promiseDate{
     width:200px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .board_sport{
     width:150px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+.boardList_main_box span{
+    width:600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color:Gray;
 }

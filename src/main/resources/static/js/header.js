@@ -27,11 +27,9 @@ $(function () {
                 }
             });
             getSportCategory.push("기타 종목");
-            let html = ``
+            let html = `<div href="javascript:void(0)" class="headerTop"><a href="/boards/list">전체 게시글</a></div>`
             $(getSportCategory).each(function (index, item) {
-                html += `<div href="javascript:void(0)" class="headerTop"id="${item}">${item}
-                 
-                        </div>`;
+                html += `<div href="javascript:void(0)" class="headerTop"id="${item}">${item}</div>`;
             });
             $(".header_menu").html(html);
         },
@@ -53,7 +51,7 @@ $(function () {
             let html = "";
             switch (id) {
                 case "트레킹":
-                    html = CategoryList("트래킹", CategoryWalk);
+                    html = CategoryList("트레킹", CategoryWalk);
                     $("#" + id).append(html);
                     break;
                 case "구기종목":

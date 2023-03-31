@@ -84,7 +84,10 @@
     flex-direction: column;
     position: fixed;
     top:145px;
-    border:1px solid #EA4335;
+    border:2px solid #e2e2e2;
+    background-color: #4285F4;
+
+    border-radius: 10px;
 }
 .headerTop ul li{
     width: 200px;
@@ -99,7 +102,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border:1px solid #e2e2e2;
+    color:white;
+    font-weight: bold;
 }
 
 .logout_form {
