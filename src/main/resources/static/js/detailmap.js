@@ -11,24 +11,61 @@ $(function () {
     };
 
     const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-    const markerPosition = new kakao.maps.LatLng(boardMapCordx, boardMapCordy);
-
-// 마커를 생성합니다
-    const marker = new kakao.maps.Marker({
+    const markerPosition = new kakao.maps.LatLng(boardMapCordx, boardMapCordy); // 마커를 생성할 약속 장소의 좌표값,
+    // 마커를 생성합니다
+    const marker = new kakao.maps.Marker({ // 해당 좌표의 위치에 마커를 생성하는 작업.
         position: markerPosition
     });
-    marker.setMap(map);
+    marker.setMap(map); // Map에 실제로 marker를 셋팅
 
-    const iwContent =`<div class="marker_naming"style="padding:5px;">${boardMapName}<div class="info_url"><a href="https://map.kakao.com/link/map/${boardMapName},${boardMapCordx},${boardMapCordy}" target="_blank">지도에서보기</a> <a href="https://map.kakao.com/link/to/${boardMapName},${boardMapCordy},${boardMapCordy}"target="_blank">길찾기</a></div></div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        iwPosition = new kakao.maps.LatLng(boardMapCordx, boardMapCordy); //인포윈도우 표시 위치입니다
 
-// 인포윈도우를 생성합니다
+    const iwContent =`<div class="marker_naming"style="padding:5px;">${boardMapName}<div class="info_url"><a href="https://map.kakao.com/link/map/${boardMapName},${boardMapCordx},${boardMapCordy}" target="_blank">지도에서보기</a> <a href="https://map.kakao.com/link/to/${boardMapName},${boardMapCordy},${boardMapCordy}"target="_blank">길찾기</a></div></div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    
+    //마커에 인포 윈도우를 생성해준다.
     const infowindow = new kakao.maps.InfoWindow({
-        position: iwPosition,
+        position: markerPosition,  // 원래는 iwContent와함께 인포윈도우의 좌표를 설정하지만 나는 이미 만들어놓은 좌표값이 존재함. 그래서 div만생성
         content: iwContent
     });
-    infowindow.open(map, marker);
+    infowindow.open(map, marker);   // Map에 인포윈도우를 위치하는 실제 기능
+
+
+
+    if (navigator.geolocation) {
+        // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            const lat = position.coords.latitude, // 위도
+                lon = position.coords.longitude; // 경도
+            const locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+                message = '<div class="myMap">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
+            // 마커와 인포윈도우를 표시합니다
+            displayMarker(locPosition, message);
+        });
+    } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+        const message = '현재 위치를 찾을수 없어 약속 장소만 표시.'
+        displayMarker(markerPosition, message);
+    }
+
+// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+    function displayMarker(locPosition, message) {
+        // 마커를 생성합니다
+        const marker = new kakao.maps.Marker({
+            map: map,
+            position: locPosition
+        });
+        const iwContent = message, // 인포윈도우에 표시할 내용
+            iwRemoveable = true;
+        // 인포윈도우를 생성합니다
+        const infowindow = new kakao.maps.InfoWindow({
+            content : iwContent,
+            removable : iwRemoveable
+        });
+        // 인포윈도우를 마커위에 표시합니다
+        infowindow.open(map, marker);
+        map.setCenter(markerPosition);
+    }
+
+
 
 // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
     const mapTypeControl = new kakao.maps.MapTypeControl();
