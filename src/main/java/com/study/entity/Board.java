@@ -16,7 +16,6 @@ public class Board{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_no")
     private Long boardNo;
 
     @ManyToOne
@@ -34,11 +33,9 @@ public class Board{
     private String boardName;
     private String boardContent;
 
-    @Column(name = "board_promise_from")
     @Temporal(TemporalType.TIMESTAMP)
     private Date boardPromiseFrom;
 
-    @Column(name = "board_promise_until")
     @Temporal(TemporalType.TIMESTAMP)
     private Date boardPromiseUntil;
 
@@ -48,9 +45,15 @@ public class Board{
     private String boardMapName;
     private String boardStatus;
 
+    private int boardHit;
+
     @Temporal(TemporalType.DATE)
     private Date createDate;
 
+
+    public void UpdateBoardHit(){
+        this.boardHit=boardHit+1;
+    }
 
 
 

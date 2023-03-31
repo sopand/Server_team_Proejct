@@ -2,6 +2,7 @@ package com.study.service;
 
 import com.study.dto.BoardRequest;
 import com.study.dto.BoardResponse;
+import com.study.entity.Board;
 import com.study.entity.BoardRepository;
 import com.study.entity.User;
 import com.study.entity.UserRepository;
@@ -28,17 +29,18 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public List<BoardResponse> findAllBoards(){
+
         List<BoardResponse> getAllBoards=boardRepository.findAllByOrderByBoardNoAsc().stream()
                 .filter(entity->entity!=null)
                 .map(BoardResponse::new).toList();
         return getAllBoards;
     }
     
-    @Transactional(readOnly = true)
+    @Transactional
     public BoardResponse findBoard(Long boardNo){
-        return boardRepository.findByBoardNo(boardNo)
-                .map(BoardResponse::new)
-                .orElseThrow(()->new IllegalArgumentException("찾을수 없는 게시글입니다"));
+        Board getBoard=boardRepository.findByBoardNo(boardNo).orElseThrow(()->new IllegalArgumentException("찾을수 없는 게시글입니다"));
+        getBoard.UpdateBoardHit();
+        return new BoardResponse(getBoard);
     }
 
 }

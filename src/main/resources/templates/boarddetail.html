@@ -31,8 +31,8 @@
             </div>
 
             <div class="detail_tag2">
-                <span class="tag2_name" th:text="|모임 장소 : ${board.boardMapName}|"></span>
-                <span class="tag2_content" th:text="|약속 시간 : ${board.boardPromiseFrom} 부터 ${board.boardPromiseUntil}까지 예정|"></span>
+                <span class="timetag tag2_name" th:text="|모임 장소 : ${board.boardMapName}|"></span>
+                <span class="timetag tag2_content" th:text="|약속 시간 :${#strings.substring(board.boardPromiseFrom, 0, 19)} 부터 ${#strings.substring(board.boardPromiseUntil, 0, 19)} 까지 예정|"></span>
             </div>
 
 

@@ -34,7 +34,7 @@
     justify-content: center;
 }
 .boardList_main_box{
-    width:900px;
+    width:1200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,7 +43,7 @@
     padding-bottom: 50px;
 }
 .boardList_content_top,.boardList_content{
-    width:1100px;
+    width:1200px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -75,6 +75,13 @@
     color:gray;
     padding-top: 25px;
     font-size: 14px;
+}
+.board_hit{
+    width:100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .board_writer{

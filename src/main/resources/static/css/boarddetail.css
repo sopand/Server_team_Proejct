@@ -64,6 +64,9 @@
 
 
 }
+.timetag{
+    color:red;
+}
 .tag2_content{
     width: 600px;
     display: flex;

@@ -20,6 +20,18 @@
 
     <main class="boardList_main_con">
 
+        <form>
+            <div class="search_box">
+                <input type="search" placeholder="검색어 입력">
+                <button>검색</button>
+            </div>
+            <div class="sort_box">
+                <select>
+
+                </select>
+            </div>
+
+        </form>
         <div class="boardList_btn_box">
             <a href="/boards">게시글 등록</a>
         </div>
@@ -31,14 +43,18 @@
                 <li class="board_promiseDate">약속 일자</li>
                 <li class="board_writer">작성자</li>
                 <li class="board_createDate">작성일</li>
+                <li class="board_hit">조회수</li>
             </ul>
             <ul class="boardList_content" th:each="board:${board}">
                 <li class="board_no" th:text="${board.boardNo}"></li>
-                <li class="board_name"><a th:href="|/boards/detail/${board.boardNo}|" th:text="${board.boardName}"></a></li>
+                <li class="board_name">
+                    <a th:href="|/boards/detail/${board.boardNo}|" th:text="${board.boardName}"></a>
+                </li>
                 <li class="board_sport" th:text="${board.sport.spoName}"></li>
                 <li class="board_promiseDate" th:text="${board.boardPromiseFrom}"></li>
                 <li class="board_writer" th:text="${board.user.email}"></li>
                 <li class="board_createDate" th:text="${board.createDate}"></li>
+                <li class="board_hit" th:text="${board.boardHit}"></li>
             </ul>
         </div>
         <div class="boardList_main_box" th:if="${#lists.isEmpty(board)}">

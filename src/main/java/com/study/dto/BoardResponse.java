@@ -25,6 +25,7 @@ public class BoardResponse {
     private String boardMapCordy;
     private String boardMapName;
     private String boardStatus;
+    private int boardHit;
 
     private Date createDate;
 
@@ -41,6 +42,7 @@ public class BoardResponse {
         this.boardMapName=entity.getBoardMapName();
         this.boardStatus=entity.getBoardStatus();
         this.createDate=entity.getCreateDate();
+        this.boardHit=entity.getBoardHit();
     }
 
 
