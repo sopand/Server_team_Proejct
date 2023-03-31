@@ -17,7 +17,7 @@ public class BoardRequest {
 
     private String email;
     private String boardName;
-    private String boardDay;
+
     private String boardPromiseFrom;
     private String boardPromiseUntil;
     private String boardContent;
@@ -33,11 +33,11 @@ public class BoardRequest {
 
 
 
-    public Date changeDate(String day,String time) throws ParseException {
-        String dayTime=day+" "+time;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return formatter.parse(dayTime);
+    public Date changeDate(String time) throws ParseException {
+        String newTime=time.replace("T"," ");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date formatDate = formatter.parse(newTime);
+        return formatDate;
     }
     public Board toCreateBoard() throws ParseException {
         this.sport=Sport.builder().spoNo(spoNo).build();
@@ -45,8 +45,8 @@ public class BoardRequest {
                 .sport(sport)
                 .user(user)
                 .boardName(boardName)
-                .boardPromiseFrom(changeDate(boardDay,boardPromiseFrom))
-                .boardPromiseUntil(changeDate(boardDay,boardPromiseUntil))
+                .boardPromiseFrom(changeDate(boardPromiseFrom))
+                .boardPromiseUntil(changeDate(boardPromiseUntil))
                 .boardContent(boardContent)
                 .boardMapCordx(boardMapCordx)
                 .boardMapCordy(boardMapCordy)

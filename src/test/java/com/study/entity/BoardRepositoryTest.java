@@ -51,7 +51,6 @@ class BoardRepositoryTest {
 
     private BoardRequest createBoardRequest() {
         BoardRequest boardRequest = new BoardRequest();
-        boardRequest.setBoardDay("2024-04-01");
         boardRequest.setBoardContent("asdasdas");
         boardRequest.setBoardName("제목이요");
         boardRequest.setBoardMapName("만남의광장");

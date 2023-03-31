@@ -33,20 +33,14 @@
                 <input name="email" th:value="${#authentication.name}" readonly>
             </label>
 
-            <label class="boardAddTag2">
-                <span>운동 날짜 : </span>
-                <input name="boardDay"  type="date">
-            </label>
+
             <div class="boardAddTag2">
                 <span>운동 시간: </span>
                 <div class="tag_time">
-                    <select name="boardPromiseFrom">
-                    </select>
-                    에서
-                    <select name="boardPromiseUntil">
-                    </select>
+                    <input type="datetime-local" name="boardPromiseFrom" >
+                   부터
+                    <input type="datetime-local" name="boardPromiseUntil">
                     까지
-
                 </div>
             </div>
             <label class="boardAddTag1">
