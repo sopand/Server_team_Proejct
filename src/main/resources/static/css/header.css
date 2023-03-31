@@ -62,15 +62,44 @@
 
 }
 
-.header_menu a {
+.headerTop{
     width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     font-size: 20px;
     font-weight: bold;
     color: white;
+    cursor: pointer;
+}
+.headerTop:hover{
+    color:red;
+}
+.headerTop ul{
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    top:145px;
+    border:1px solid #EA4335;
+}
+.headerTop ul li{
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+}
+.headerTop ul li a{
+    width: 200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:1px solid #e2e2e2;
 }
 
 .logout_form {
