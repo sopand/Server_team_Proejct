@@ -27,3 +27,10 @@
         }
         return html;
     }
+    function selectRepaet(){
+        let html="";
+        for(let i=1;i<=20;i++){
+            html += `<option value="${i}">${i}명</option>`;
+        }
+        return html;
+    }

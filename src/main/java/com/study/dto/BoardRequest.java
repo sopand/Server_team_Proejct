@@ -30,6 +30,7 @@ public class BoardRequest {
 
     private User user;
     private Sport sport;
+    private int boardPeople;
 
 
 
@@ -51,6 +52,7 @@ public class BoardRequest {
                 .boardMapCordx(boardMapCordx)
                 .boardMapCordy(boardMapCordy)
                 .boardMapName(boardMapName)
+                .boardPeople(boardPeople)
                 .createDate(new Date())
                 .build();
     }

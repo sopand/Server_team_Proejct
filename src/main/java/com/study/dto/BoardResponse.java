@@ -29,6 +29,9 @@ public class BoardResponse {
 
     private Date createDate;
 
+    private int boardPeople;
+    private int boardNowPeople;
+
     public BoardResponse(Board entity){
         this.user=entity.getUser();
         this.sport=entity.getSport();
@@ -43,6 +46,8 @@ public class BoardResponse {
         this.boardStatus=entity.getBoardStatus();
         this.createDate=entity.getCreateDate();
         this.boardHit=entity.getBoardHit();
+        this.boardPeople=entity.getBoardPeople();
+        this.boardNowPeople=entity.getBoardNowPeople();
     }
 
 

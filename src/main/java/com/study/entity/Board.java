@@ -46,6 +46,8 @@ public class Board{
     private String boardStatus;
 
     private int boardHit;
+    private int boardPeople;
+    private int boardNowPeople;
 
     @Temporal(TemporalType.DATE)
     private Date createDate;
