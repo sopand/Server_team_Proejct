@@ -33,5 +33,12 @@ public class BoardService {
                 .map(BoardResponse::new).toList();
         return getAllBoards;
     }
+    
+    @Transactional(readOnly = true)
+    public BoardResponse findBoard(Long boardNo){
+        return boardRepository.findByBoardNo(boardNo)
+                .map(BoardResponse::new)
+                .orElseThrow(()->new IllegalArgumentException("찾을수 없는 게시글입니다"));
+    }
 
 }

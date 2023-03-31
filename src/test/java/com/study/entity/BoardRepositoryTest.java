@@ -40,13 +40,24 @@ class BoardRepositoryTest {
     @Test
     void 게시글등록() throws ParseException {
         //given
-        BoardRequest boardRequest=createBoardRequest();
-        Board board= boardRequest.toCreateBoard();
+        BoardRequest boardRequest = createBoardRequest();
+        Board board = boardRequest.toCreateBoard();
         //when
-        Board insertBoard=boardRepository.save(board);
+        Board insertBoard = boardRepository.save(board);
         //then
         assertThat(insertBoard.getBoardName()).isEqualTo(board.getBoardName());
         assertThat(insertBoard.getBoardContent()).isEqualTo(board.getBoardContent());
+    }
+
+    @Test
+    void 고유번호로_게시글찾기(){
+        //given
+        Long boardNo=1L;
+        //when
+        Board getBoard=boardRepository.findByBoardNo(boardNo).orElseThrow(()->new IllegalArgumentException("해당 게시물이 없어요"));
+        //then
+        assertThat(getBoard.getBoardNo()).isEqualTo(boardNo);
+
     }
 
     private BoardRequest createBoardRequest() {
@@ -56,8 +67,8 @@ class BoardRepositoryTest {
         boardRequest.setBoardMapName("만남의광장");
         boardRequest.setBoardMapCordx("33.450701");
         boardRequest.setBoardMapCordy("126.570667");
-        boardRequest.setBoardPromiseFrom("01:00:00");
-        boardRequest.setBoardPromiseUntil("03:00:00");
+        boardRequest.setBoardPromiseFrom("2014-04-01T01:00");
+        boardRequest.setBoardPromiseUntil("2014-04-01T03:00");
         boardRequest.setUser(User.builder().no(1L).build());
         boardRequest.setSpoNo(1L);
         return boardRequest;

@@ -28,13 +28,13 @@
                 <li class="board_no">No</li>
                 <li class="board_name">제목</li>
                 <li class="board_sport">종목</li>
-                <li class="board_promiseDate">예정일</li>
+                <li class="board_promiseDate">약속 일자</li>
                 <li class="board_writer">작성자</li>
                 <li class="board_createDate">작성일</li>
             </ul>
             <ul class="boardList_content" th:each="board:${board}">
                 <li class="board_no" th:text="${board.boardNo}"></li>
-                <li class="board_name"><a href="/boards/detail" th:text="${board.boardName}"></a></li>
+                <li class="board_name"><a th:href="|/boards/detail/${board.boardNo}|" th:text="${board.boardName}"></a></li>
                 <li class="board_sport" th:text="${board.sport.spoName}"></li>
                 <li class="board_promiseDate" th:text="${board.boardPromiseFrom}"></li>
                 <li class="board_writer" th:text="${board.user.email}"></li>
