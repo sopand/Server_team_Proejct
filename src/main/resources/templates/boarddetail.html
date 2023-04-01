@@ -38,15 +38,16 @@
                 <span class="tag3_content" th:text="|약속 시간 :${#strings.substring(board.boardPromiseFrom, 0, 19)} 부터 ${#strings.substring(board.boardPromiseUntil, 0, 19)} 까지 예정|"></span>
             </div>
 
+            <span class="detail_text">약속 장소 상세지도</span>
+            <div id="map">     </div>
 
             <span class="detail_text">상세 모집 내용</span>
             <div class="detail_tag4" th:utext="${board.boardContent}">
             </div>
 
-            <span class="detail_text">약속 장소 상세지도</span>
-            <div id="map">
 
-            </div>
+
+
             <input type="hidden" name="email" th:value="${#authentication.name}" sec:authorize="isAuthenticated()">
             <input type="hidden" name="boardNo" th:value="${board.boardNo}">
             <button type="button" class="groupAdd_btn">모임 참가하기</button>

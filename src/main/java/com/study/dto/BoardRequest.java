@@ -15,6 +15,7 @@ public class BoardRequest {
 
     private Long spoNo;
 
+
     private String email;
     private String boardName;
 
