@@ -84,9 +84,8 @@ $(function () {
 
 $(function (){
     $(".groupAdd_btn").click(function (){
-        const email=$("input[name=email]").val();
         const boardNo=$("input[name=boardNo]").val();
-        ajaxCall("/boards/club","POST",{email,boardNo},function (data)
+        ajaxCall("/boards/club","POST",{boardNo},function (data)
         {
             if(data!=null){
                 alert("모임 참가신청 성공");

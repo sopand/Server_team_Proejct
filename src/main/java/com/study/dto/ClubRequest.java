@@ -7,11 +7,12 @@ import lombok.Data;
 
 @Data
 public class ClubRequest {
-        private String email;
+        private Long no;
         private Long boardNo;
 
-        public Club toCreateClubEntity(User user){
+        public Club toCreateClubEntity(){
             Board setBoardByBoardNo=Board.builder().boardNo(boardNo).build();
-            return Club.builder().board(setBoardByBoardNo).user(user).build();
+            User setUserByUserNo=User.builder().no(no).build();
+            return Club.builder().board(setBoardByBoardNo).user(setUserByUserNo).build();
         }
 }

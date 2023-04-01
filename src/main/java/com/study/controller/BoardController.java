@@ -26,21 +26,14 @@ public class BoardController {
     private final SportService sportService;
 
 
-    public static Long getUserNo(UserAdapter userAdapter){
-            if(userAdapter!=null){
-                return userAdapter.getUser().getNo();
-            }else{
-                return null;
-            }
-    }
+
     /**
      * 게시글 보기를 클릭할 시 작동하는 맵핑, 게시글의 리스트를 출력해줌
      * @param model = View에 출력할 데이터를 설정하기 위한 객체 ( 모든 게시글에대한 리스트를 출력 하기 위해 사용 )
      * @return = boardlist.html로 이동
      */
     @GetMapping("/boards/list")
-    public String findBoardList(Model model, @AuthenticationPrincipal UserAdapter userAdapter) {
-        System.out.println("유저정보"+getUserNo(userAdapter));
+    public String findBoardList(Model model) {
         List<BoardResponse> getAllBoards = boardService.findAllBoards();
         model.addAttribute("board", getAllBoards);
         return "boardlist";

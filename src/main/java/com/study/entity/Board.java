@@ -30,6 +30,9 @@ public class Board{
     @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
     private List<Img> img;
 
+    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
+    private List<Club> club;
+
     private String boardName;
     private String boardContent;
 
