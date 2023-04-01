@@ -1,9 +1,9 @@
 package com.study.dto;
 
-import com.study.entity.Role;
+import com.study.oAuth.Role;
 import com.study.entity.Sport;
 import com.study.entity.User;
-import com.study.entity.oAuthChk;
+import com.study.oAuth.oAuthChk;
 import lombok.Data;
 
 import java.text.ParseException;

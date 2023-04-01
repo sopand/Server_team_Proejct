@@ -1,10 +1,10 @@
 package com.study.entity;
 
 import com.study.dto.UserRequest;
+import com.study.oAuth.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 

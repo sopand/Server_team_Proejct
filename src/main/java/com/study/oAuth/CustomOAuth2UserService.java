@@ -49,6 +49,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
             userRepository.save(byUsername);
         }
 
-        return new PrincipalDetails(byUsername, oAuth2UserInfo);	//수정
+        return new UserAdapter(byUsername, oAuth2UserInfo);	//수정
     }
 }

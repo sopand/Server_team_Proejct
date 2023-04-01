@@ -1,4 +1,4 @@
-package com.study.entity;
+package com.study.oAuth;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -3,17 +3,18 @@ package com.study.controller;
 import com.study.dto.BoardRequest;
 import com.study.dto.BoardResponse;
 import com.study.dto.SportResponse;
+import com.study.oAuth.UserAdapter;
 import com.study.service.BoardService;
 import com.study.service.ImgService;
 import com.study.service.SportService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -24,13 +25,22 @@ public class BoardController {
     private final ImgService imgService;
     private final SportService sportService;
 
+
+    public static Long getUserNo(UserAdapter userAdapter){
+            if(userAdapter!=null){
+                return userAdapter.getUser().getNo();
+            }else{
+                return null;
+            }
+    }
     /**
      * 게시글 보기를 클릭할 시 작동하는 맵핑, 게시글의 리스트를 출력해줌
      * @param model = View에 출력할 데이터를 설정하기 위한 객체 ( 모든 게시글에대한 리스트를 출력 하기 위해 사용 )
      * @return = boardlist.html로 이동
      */
     @GetMapping("/boards/list")
-    public String findBoardList(Model model) {
+    public String findBoardList(Model model, @AuthenticationPrincipal UserAdapter userAdapter) {
+        System.out.println("유저정보"+getUserNo(userAdapter));
         List<BoardResponse> getAllBoards = boardService.findAllBoards();
         model.addAttribute("board", getAllBoards);
         return "boardlist";

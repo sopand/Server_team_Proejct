@@ -3,9 +3,9 @@ package com.study.service;
 import com.study.dto.UserRequest;
 import com.study.dto.UserResponse;
 import com.study.entity.User;
+import com.study.oAuth.UserAdapter;
 import com.study.entity.UserRepository;
-import com.study.entity.oAuthChk;
-import com.study.oAuth.PrincipalDetails;
+import com.study.oAuth.oAuthChk;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,11 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.text.ParseException;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.function.Supplier;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +25,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user=userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("해당하는 이메일이 없는걸요??"));
-        return new PrincipalDetails(user);
+        return new UserAdapter(user);
     }
     @Transactional
     public Long createUser(UserRequest userRequest) throws Exception {
