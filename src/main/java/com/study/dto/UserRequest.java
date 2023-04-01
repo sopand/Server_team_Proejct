@@ -15,6 +15,8 @@ public class UserRequest {
 
     private String nickname;
 
+    private Long no;
+
 
     private String name;
 
@@ -48,6 +50,21 @@ public class UserRequest {
 
     public User toCreateUserEntity() throws ParseException {
         return User.builder()
+                .nickname(nickname)
+                .name(name)
+                .email(email)
+                .password(password)
+                .sport(toSportEntityChange())
+                .sportTimeFrom(toDateChanger(sportTimeFrom))
+                .sportTimeUntil(toDateChanger(sportTimeUntil))
+                .role(Role.ROLE_USER)
+                .oauthMemberCheck(oAuthChk.NO_OAUTH_USER.getStatus())
+                .build();
+    }
+
+    public User toTestCreateEntity() throws ParseException {
+        return User.builder()
+                .no(no)
                 .nickname(nickname)
                 .name(name)
                 .email(email)

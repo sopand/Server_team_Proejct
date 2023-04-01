@@ -1,9 +1,11 @@
 package com.study.service;
 
 import com.study.dto.BoardRequest;
+import com.study.dto.BoardResponse;
 import com.study.entity.Board;
 import com.study.entity.BoardRepository;
 import com.study.entity.User;
+import com.study.entity.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,18 +34,23 @@ class BoardServiceTest {
     @Mock
     private BoardRepository boardRepository;
 
+    @Mock
+    private UserRepository userRepository;
+
     @Test
     @DisplayName("게시글 생성")
-    void createBoard() throws ParseException {
+    void createBoard() throws Exception {
         //given
-        BoardRequest getBoardReqeust=createBoardRequest();
+        BoardRequest stubBoardReqeust=createBoardRequest();
+        User stubUser=User.builder().email("테스트ID").no(1L).name("KIM").build();
         //stub
-        when(boardRepository.save(any())).thenReturn(getBoardReqeust.toCreateBoard());
+        when(boardRepository.save(any())).thenReturn(stubBoardReqeust.toTestCreateBoard());
+        when(userRepository.findByEmail(stubBoardReqeust.getEmail())).thenReturn(Optional.ofNullable(stubUser));
         //when
-        Board getBoardEntity=boardRepository.save(getBoardReqeust.toCreateBoard());
+        Long getBoardNo=boardService.createBoard(stubBoardReqeust);
         //then
-        assertThat(getBoardReqeust.getBoardName()).isEqualTo(getBoardEntity.getBoardName());
-        assertThat(getBoardReqeust.getBoardContent()).isEqualTo(getBoardEntity.getBoardContent());
+        assertThat(getBoardNo).isEqualTo(stubBoardReqeust.getBoardNo());
+        assertThat(getBoardNo).isNotNull();
 
     }
 
@@ -51,12 +59,12 @@ class BoardServiceTest {
     void findAllBoards() {
         //given
         //stub
-        List<Board> stubBoardList=createBoardList();
+        List<Board> stubBoardList = createBoardList();
         when(boardRepository.findAllByOrderByBoardNoAsc()).thenReturn(stubBoardList);
         //when
-        List<Board> getBoardList=boardRepository.findAllByOrderByBoardNoAsc();
+        List<BoardResponse> getBoardList=boardService.findAllBoards();
         //then
-        assertThat(getBoardList).isEqualTo(stubBoardList);
+        assertThat(getBoardList).isNotEmpty();
     }
 
     @Test
@@ -73,6 +81,8 @@ class BoardServiceTest {
 
     private BoardRequest createBoardRequest() {
         BoardRequest boardRequest = new BoardRequest();
+        boardRequest.setBoardNo(1L);
+        boardRequest.setEmail("테스트ID");
         boardRequest.setBoardContent("asdasdas");
         boardRequest.setBoardName("제목이요");
         boardRequest.setBoardMapName("만남의광장");
@@ -80,7 +90,6 @@ class BoardServiceTest {
         boardRequest.setBoardMapCordy("126.570667");
         boardRequest.setBoardPromiseFrom("2014-04-01T01:00");
         boardRequest.setBoardPromiseUntil("2014-04-01T03:00");
-        boardRequest.setUser(User.builder().no(1L).build());
         boardRequest.setSpoNo(1L);
         return boardRequest;
     }

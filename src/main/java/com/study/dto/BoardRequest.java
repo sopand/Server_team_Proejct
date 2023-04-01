@@ -14,7 +14,7 @@ import java.util.Date;
 public class BoardRequest {
 
     private Long spoNo;
-
+    private Long boardNo;
 
     private String email;
     private String boardName;
@@ -44,6 +44,25 @@ public class BoardRequest {
     public Board toCreateBoard() throws ParseException {
         this.sport=Sport.builder().spoNo(spoNo).build();
         return Board.builder()
+                .sport(sport)
+                .user(user)
+                .boardName(boardName)
+                .boardPromiseFrom(changeDate(boardPromiseFrom))
+                .boardPromiseUntil(changeDate(boardPromiseUntil))
+                .boardContent(boardContent)
+                .boardMapCordx(boardMapCordx)
+                .boardMapCordy(boardMapCordy)
+                .boardMapName(boardMapName)
+                .boardPeople(boardPeople)
+                .createDate(new Date())
+                .build();
+    }
+
+
+    public Board toTestCreateBoard() throws ParseException {
+        this.sport=Sport.builder().spoNo(spoNo).build();
+        return Board.builder()
+                .boardNo(boardNo)
                 .sport(sport)
                 .user(user)
                 .boardName(boardName)

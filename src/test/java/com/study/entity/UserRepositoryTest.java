@@ -1,13 +1,18 @@
 package com.study.entity;
 
 import com.study.config.DataBaseConfig;
+import com.study.dto.UserRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+
+import java.text.ParseException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,15 +27,30 @@ class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    @BeforeEach
+    public void beforeCreateUser() throws ParseException {
+        userRepository.save(createUserRequest().toCreateUserEntity());
+    }
     @Test
     void 이메일로_USER찾기() {
         //given
-        String email="pows1031@naver.com";
+        UserRequest stubUserRequest=createUserRequest();
         //when
-        User user=userRepository.findByEmail(email).orElse(null);
-        
+        User user=userRepository.findByEmail(stubUserRequest.getEmail()).orElse(null);
         //then
         assertThat(user).isNotNull();
-        log.info("User객체 데이터 유무 :{}",user);
+        assertThat(stubUserRequest.getEmail()).isEqualTo(user.getEmail());
+        log.info("User객체 데이터 유무 :{}",user.getEmail());
+    }
+
+    private UserRequest createUserRequest(){
+        UserRequest stubUserRequest=new UserRequest();
+        stubUserRequest.setPassword("TestPass");
+        stubUserRequest.setName("TestName");
+        stubUserRequest.setNickname("TestNick");
+        stubUserRequest.setEmail("Test@Test.com");
+        stubUserRequest.setSportNo(1L);
+        return stubUserRequest;
+
     }
 }

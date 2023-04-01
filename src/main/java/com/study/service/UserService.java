@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
 
         if (user.getOauthMemberCheck().equals(oAuthChk.OAUTH_USER.getStatus())) {
             user.oAuthUserUpdate(userRequest);
-            return;
+            return ;
         }
         if (!passwordEncoder.matches(userRequest.getBeforePassword(), user.getPassword())) {
             throw new Exception("인증을 위한 기존 비밀번호가 일치하지 않습니다.");
