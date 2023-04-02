@@ -6,6 +6,8 @@ import com.study.entity.Board;
 import com.study.entity.BoardRepository;
 import com.study.entity.User;
 import com.study.entity.UserRepository;
+import com.study.exception.CustomException;
+import com.study.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +40,7 @@ public class BoardService {
     
     @Transactional
     public BoardResponse findBoard(Long boardNo){
-        Board getBoard=boardRepository.findByBoardNo(boardNo).orElseThrow(()->new IllegalArgumentException("찾을수 없는 게시글입니다"));
+        Board getBoard=boardRepository.findByBoardNo(boardNo).orElseThrow(()->new CustomException(ErrorCode.NOT_FOUND));
         getBoard.UpdateBoardHit();
         return new BoardResponse(getBoard);
     }

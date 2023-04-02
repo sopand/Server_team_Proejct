@@ -3,6 +3,8 @@ package com.study.service;
 import com.study.dto.UserRequest;
 import com.study.dto.UserResponse;
 import com.study.entity.User;
+import com.study.exception.CustomException;
+import com.study.exception.ErrorCode;
 import com.study.oAuth.UserAdapter;
 import com.study.entity.UserRepository;
 import com.study.oAuth.oAuthChk;
@@ -23,14 +25,14 @@ public class UserService implements UserDetailsService {
 
     @Transactional(readOnly = true)
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user=userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("해당하는 이메일이 없는걸요??"));
+    public UserDetails loadUserByUsername(String email)  {
+        User user=userRepository.findByEmail(email).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER_EMAIL));
         return new UserAdapter(user);
     }
     @Transactional
     public Long createUser(UserRequest userRequest) throws Exception {
         if (userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
-            throw new Exception("이미 존재하는 이메일 입니다.");
+            throw new CustomException(ErrorCode.CREATE_EMAIL_DUPLICATION);
         }
         PasswordCheck(userRequest);
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
@@ -44,14 +46,14 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void modifyUser(UserRequest userRequest) throws Exception {
-        User user = userRepository.findByEmail(userRequest.getEmail()).orElseThrow(() -> new UsernameNotFoundException("해당하는 이메일이 없는걸요??"));
+        User user = userRepository.findByEmail(userRequest.getEmail()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER_EMAIL));
 
         if (user.getOauthMemberCheck().equals(oAuthChk.OAUTH_USER.getStatus())) {
             user.oAuthUserUpdate(userRequest);
             return ;
         }
         if (!passwordEncoder.matches(userRequest.getBeforePassword(), user.getPassword())) {
-            throw new Exception("인증을 위한 기존 비밀번호가 일치하지 않습니다.");
+            throw new CustomException(ErrorCode.BEFORE_PASSWORD_UN_PASSWORD);
         }
         PasswordCheck(userRequest);
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
@@ -60,7 +62,7 @@ public class UserService implements UserDetailsService {
 
     public static void PasswordCheck(UserRequest userRequest) throws Exception {
         if (!userRequest.getPassword().equals(userRequest.getPasswordCheck())) {
-            throw new Exception("입력한 비밀번호와 비밀번호 확인 값이 틀립니다.");
+            throw new CustomException(ErrorCode.PASSWORD_UN_PASSWORD_CHECK);
         }
     }
 

@@ -2,6 +2,8 @@ package com.study.controller;
 
 import com.study.dto.ClubRequest;
 import com.study.dto.ClubResponse;
+import com.study.exception.CustomException;
+import com.study.exception.ErrorCode;
 import com.study.oAuth.UserAdapter;
 import com.study.service.ClubService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +22,7 @@ public class ClubController {
         if(userAdapter!=null){
             return userAdapter.getUser().getNo();
         }else{
-            return null;
+            throw new CustomException(ErrorCode.FORBIDDEN_ACCESS);
         }
     }
     @ResponseBody
