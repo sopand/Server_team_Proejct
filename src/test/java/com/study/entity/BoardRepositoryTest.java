@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +33,9 @@ class BoardRepositoryTest {
     @Test
     void 게시글목록을_ORDERBY_정렬해서가져오기 (){
         //given
+        PageRequest page=PageRequest.of(0,15, Sort.by(Sort.Direction.ASC,"boardNo"));
         //when
-        List<Board> getBoardList=boardRepository.findAllByOrderByBoardNoAsc();
+        Page<Board> getBoardList=boardRepository.findAll(page);
         //then
         assertThat(getBoardList).isNotEmpty();
 

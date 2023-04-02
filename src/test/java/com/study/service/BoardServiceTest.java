@@ -2,6 +2,7 @@ package com.study.service;
 
 import com.study.dto.BoardRequest;
 import com.study.dto.BoardResponse;
+import com.study.dto.PagingListGroup;
 import com.study.entity.Board;
 import com.study.entity.BoardRepository;
 import com.study.entity.User;
@@ -12,6 +13,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
@@ -60,11 +64,12 @@ class BoardServiceTest {
         //given
         //stub
         List<Board> stubBoardList = createBoardList();
-        when(boardRepository.findAllByOrderByBoardNoAsc()).thenReturn(stubBoardList);
+        PageRequest page=PageRequest.of(0,15,Sort.by(Sort.Direction.ASC,"boardNo"));
+        when(boardRepository.findAll()).thenReturn(stubBoardList);
         //when
-        List<BoardResponse> getBoardList=boardService.findAllBoards();
+        PagingListGroup getBoardList=boardService.findAllBoards(page);
         //then
-        assertThat(getBoardList).isNotEmpty();
+        assertThat(getBoardList).isNotNull();
     }
 
     @Test

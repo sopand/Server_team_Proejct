@@ -27,7 +27,10 @@
             </div>
             <div class="sort_box">
                 <select>
-
+                    <option value="">정렬</option>
+                    <option value="">조회수 순</option>
+                    <option value="">오래된 순</option>
+                    <option value="">최신 순</option>
                 </select>
             </div>
 
@@ -45,7 +48,7 @@
                 <li class="board_createDate">작성일</li>
                 <li class="board_hit">조회수</li>
             </ul>
-            <ul class="boardList_content" th:each="board:${board}">
+            <ul class="boardList_content" th:each="board:${board.list}">
                 <li class="board_no" th:text="${board.boardNo}"></li>
                 <li class="board_name">
                     <a th:href="|/boards/detail/${board.boardNo}|" th:text="${board.boardName}"></a>

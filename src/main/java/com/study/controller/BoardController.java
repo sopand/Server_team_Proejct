@@ -2,12 +2,16 @@ package com.study.controller;
 
 import com.study.dto.BoardRequest;
 import com.study.dto.BoardResponse;
+import com.study.dto.PagingListGroup;
 import com.study.dto.SportResponse;
 import com.study.oAuth.UserAdapter;
 import com.study.service.BoardService;
 import com.study.service.ImgService;
 import com.study.service.SportService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,9 +37,9 @@ public class BoardController {
      * @return = boardlist.html로 이동
      */
     @GetMapping("/boards/list")
-    public String findBoardList(Model model) {
-        List<BoardResponse> getAllBoards = boardService.findAllBoards();
-        model.addAttribute("board", getAllBoards);
+    public String findBoardList(Model model,@PageableDefault(page = 0, size = 15, sort = "boardNo", direction = Sort.Direction.DESC) Pageable pageable) {
+        PagingListGroup getPagingAllBoard = boardService.findAllBoards(pageable);
+        model.addAttribute("board", getPagingAllBoard);
         return "boardlist";
     }
 

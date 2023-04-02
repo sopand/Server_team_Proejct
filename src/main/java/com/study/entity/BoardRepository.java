@@ -1,6 +1,8 @@
 package com.study.entity;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +14,7 @@ import java.util.Optional;
 public interface BoardRepository extends JpaRepository<Board,Long> {
 
 
-    List<Board> findAllByOrderByBoardNoAsc();
+    Page<Board> findAll(Pageable pageable);
 
 
 
