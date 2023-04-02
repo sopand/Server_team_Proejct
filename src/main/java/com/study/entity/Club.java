@@ -3,6 +3,8 @@ package com.study.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,9 +20,9 @@ public class Club {
     @JoinColumn(name = "board_no")
     private Board board;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "no")
-    private User user;
+    private String clubEmail;
+
+
 
 
 

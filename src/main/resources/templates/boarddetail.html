@@ -49,6 +49,7 @@
 
 
             <input type="hidden" name="boardNo" th:value="${board.boardNo}">
+            <input type="hidden" name="email" th:value="${#authentication.name}">
             <button type="button" class="groupAdd_btn">모임 참가하기</button>
 
         </div>

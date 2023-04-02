@@ -28,7 +28,6 @@ public class ClubController {
     @ResponseBody
     @PostMapping("/boards/club")
     public ClubResponse createClub(@AuthenticationPrincipal UserAdapter userAdapter, ClubRequest clubRequest){
-        clubRequest.setNo(getUserNo(userAdapter));
         return clubService.createClubUser(clubRequest);
     }
 

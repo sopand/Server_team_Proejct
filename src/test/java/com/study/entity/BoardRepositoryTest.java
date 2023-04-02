@@ -54,7 +54,7 @@ class BoardRepositoryTest {
         //given
         Long boardNo=1L;
         //when
-        Board getBoard=boardRepository.findByBoardNo(boardNo).orElseThrow(()->new IllegalArgumentException("해당 게시물이 없어요"));
+        Board getBoard=boardRepository.findByBoarAndClubList(boardNo).orElseThrow(()->new IllegalArgumentException("해당 게시물이 없어요"));
         //then
         assertThat(getBoard.getBoardNo()).isEqualTo(boardNo);
 

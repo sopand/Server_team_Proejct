@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,12 +27,8 @@ public class Board{
     @JoinColumn(name = "spo_no")
     private Sport sport;
 
-
-    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
-    private List<Img> img;
-
-    @OneToMany(mappedBy = "board",cascade = CascadeType.ALL)
-    private List<Club> club;
+    @OneToMany(mappedBy ="board",cascade = CascadeType.ALL)
+    private List<Club> club=new ArrayList<>();
 
     private String boardName;
     private String boardContent;

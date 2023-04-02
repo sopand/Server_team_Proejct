@@ -7,6 +7,7 @@ import com.study.entity.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class BoardResponse {
     private String boardStatus;
     private int boardHit;
 
+    private List<ClubResponse> club;
+
     private Date createDate;
 
     private int boardPeople;
@@ -45,6 +48,9 @@ public class BoardResponse {
         this.boardMapName=entity.getBoardMapName();
         this.boardStatus=entity.getBoardStatus();
         this.createDate=entity.getCreateDate();
+        if(entity.getClub()!=null){
+            this.club=entity.getClub().stream().map(ClubResponse::new).toList();
+        }
         this.boardHit=entity.getBoardHit();
         this.boardPeople=entity.getBoardPeople();
         this.boardNowPeople=entity.getBoardNowPeople();
