@@ -86,7 +86,11 @@ $(function (){
     $(".groupAdd_btn").click(function (){
         const boardNo=$("input[name=boardNo]").val();
         const clubEmail=$("input[name=email]").val();
-        ajaxCall("/boards/club","POST",{email,boardNo},function (data)
+        if(clubEmail==null){
+            alert("로그인 후 참가 가능합니다.");
+            return;
+        }
+        ajaxCall("/boards/club","POST",{clubEmail,boardNo},function (data)
         {
             if(data!=null){
                 alert("모임 참가신청 성공");

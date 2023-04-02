@@ -50,6 +50,8 @@ public class BoardResponse {
         this.createDate=entity.getCreateDate();
         if(entity.getClub()!=null){
             this.club=entity.getClub().stream().map(ClubResponse::new).toList();
+            System.out.println("리스트"+club);
+            System.out.println("리스트 길이"+club.size());
         }
         this.boardHit=entity.getBoardHit();
         this.boardPeople=entity.getBoardPeople();
