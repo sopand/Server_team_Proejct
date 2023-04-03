@@ -13,7 +13,7 @@
     justify-content: center;
     padding-bottom: 150px;
     padding-top: 150px;
-
+    flex-direction: column;
 }
 .board_detail_main_box{
     width:1000px;
@@ -151,3 +151,90 @@
     font-weight: bold;
     color:red;
 }
+
+.review_box{
+    width:1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:100px;
+    flex-direction: column;
+
+}
+.reviewForm textarea{
+    width:750px;
+    height: 75px;
+    border:1px solid #e2e2e2;
+    border-radius: 10px;
+    resize: none;
+}
+.reviewForm button{
+    width:150px;
+    height: 75px;
+    color:white;
+    background-color: #4285F4;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 50px;
+}
+.reviewListBox{
+    width:950px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.reviewTag{
+    width:950px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border:1px solid #e2e2e2;
+}
+.reviewText{
+    width:950px;
+    display: flex;
+    align-items: center;
+    border-bottom:1px solid #e2e2e2;
+    height: 30px;
+}
+.reviewEmail{
+    width:500px;
+}
+.reviewDate{
+    width:400px;
+}
+.reviewEmail,.reviewDate{
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+.reviewContent{
+    width: 950px;
+    display: flex;
+    padding-left: 20px;
+    padding-top: 20px;
+    min-height: 75px;
+    border-bottom:1px solid #e2e2e2;
+}
+.reviewBtn{
+    width:950px;
+    display: flex;
+    align-items: center;
+}
+.reviewBtn a{
+    width:100px;
+    margin-left: 20px;
+
+}
+
+
+
+

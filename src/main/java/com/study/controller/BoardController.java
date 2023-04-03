@@ -4,7 +4,6 @@ import com.study.dto.BoardRequest;
 import com.study.dto.BoardResponse;
 import com.study.dto.PagingListGroup;
 import com.study.dto.SportResponse;
-import com.study.oAuth.UserAdapter;
 import com.study.service.BoardService;
 import com.study.service.ImgService;
 import com.study.service.SportService;
@@ -12,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +30,18 @@ public class BoardController {
 
 
     /**
-     * 게시글 보기를 클릭할 시 작동하는 맵핑, 게시글의 리스트를 출력해줌
+     게시글 보기를 클릭할 시 작동하는 맵핑, 게시글의 리스트를 출력해줌
      * @param model = View에 출력할 데이터를 설정하기 위한 객체 ( 모든 게시글에대한 리스트를 출력 하기 위해 사용 )
-     * @return = boardlist.html로 이동
+     * @param pageable = 기본적인 페이징 처리를 위한 데이터를 가지고 있는 객체,
+     *  @return = boardlist.html로 이동
      */
     @GetMapping("/boards/list")
     public String findBoardList(Model model,@PageableDefault(page = 0, size = 15, sort = "boardNo", direction = Sort.Direction.DESC) Pageable pageable) {
-        PagingListGroup getPagingAllBoard = boardService.findAllBoards(pageable);
+        PagingListGroup getPagingAllBoard = boardService.findAllBoards(pageable); // 페이징
         model.addAttribute("board", getPagingAllBoard);
         return "boardlist";
     }
+
 
     /**
      * 게시글의 상세페이지로 이동시켜주는 맵핑,

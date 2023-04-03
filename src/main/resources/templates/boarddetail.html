@@ -32,26 +32,52 @@
 
             <div class="detail_tag2">
                 <span class="groupTag tag2_name" th:text="|모임 장소 : ${board.boardMapName}|"></span>
-                <span class="groupTag tag2_content" th:text="|모집인원 : ${board.boardPeople}명   현재 인원 :${#lists.size(board.club)}명|" ></span>
+                <span class="groupTag tag2_content" th:text="|모집인원 : ${board.boardPeople}명   현재 인원 :${#lists.size(board.club)}명|"></span>
             </div>
             <div class="detail_tag3">
                 <span class="tag3_content" th:text="|약속 시간 :${#strings.substring(board.boardPromiseFrom, 0, 19)} 부터 ${#strings.substring(board.boardPromiseUntil, 0, 19)} 까지 예정|"></span>
             </div>
 
             <span class="detail_text">약속 장소 상세지도</span>
-            <div id="map">     </div>
+            <div id="map"></div>
 
             <span class="detail_text">상세 모집 내용</span>
             <div class="detail_tag4" th:utext="${board.boardContent}">
             </div>
 
 
-
-
             <input type="hidden" name="boardNo" th:value="${board.boardNo}">
             <input type="hidden" name="email" th:value="${#authentication.name}" sec:authorize="isAuthenticated()">
             <button type="button" class="groupAdd_btn">모임 참가하기</button>
 
+        </div>
+
+        <div class="review_box">
+            <form action="/boards/review" class="reviewForm">
+                <textarea name="reviewContent"></textarea>
+                <button type="button">댓글 등록</button>
+            </form>
+
+            <div class="reviewListBox">
+                <div class="reviewTag">
+                    <div class="reviewText">
+                    <span class="reviewEmail">
+                        pows1031@naver.com
+                    </span>
+                        <span class="reviewDate">
+                        312321312
+                    </span>
+                    </div>
+                    <div class="reviewContent">
+
+                    </div>
+                    <div class="reviewBtn">
+                        <a href="#">수정</a>
+                        <a href="#">삭제</a>
+                        <a href="#">대댓글</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <input type="hidden" name="boardMapCordx" th:value="${board.boardMapCordx}">
