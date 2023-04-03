@@ -83,13 +83,16 @@ $(function () {
 
 
 $(function (){
-    $(".groupAdd_btn").click(function (){
-        const boardNo=$("input[name=boardNo]").val();
-        const clubEmail=$("input[name=email]").val();
-        if(clubEmail==null){
+    const boardNo=$("input[name=boardNo]").val();
+    const clubEmail=$("input[name=email]").val();
+    function emailChk(email){
+        if(email==null){
             alert("로그인 후 참가 가능합니다.");
             return;
         }
+    }
+    $(".groupAdd_btn").click(function (){
+        emailChk(clubEmail);
         ajaxCall("/boards/club","POST",{clubEmail,boardNo},function (data)
         {
             if(data!=null){
@@ -99,4 +102,35 @@ $(function (){
             alert("모임 참가 신청 에러 발생");
         },)
     });
+    $(".review_add_btn").click(function(){
+        const reviewContent=$("textarea[name=reviewContent]").val();
+        const reviewWriter=clubEmail;
+        emailChk(reviewWriter);
+        ajaxCall("/boards/review","POST",{reviewWriter,boardNo,reviewContent},function (data)
+        {
+         const html=`
+           <div class="reviewTag">
+                    <div class="reviewText">
+                        <span class="reviewEmail">${data.reviewWriter}</span>
+                        <span class="reviewDate">${data.reviewDate}</span>
+                    </div>
+                    <div class="reviewContent">
+                        ${data.reviewContent}
+                    </div>
+                    <div class="reviewBtn">
+                        <a href="#">수정</a>
+                        <a href="#">삭제</a>
+                        <a href="#">대댓글</a>
+                    </div>
+                </div>
+         `;
+         $(".reviewListBox").append(html);
+
+        },function (){
+            alert("모임 참가 신청 에러 발생");
+        },)
+    });
+
+
+
 })
