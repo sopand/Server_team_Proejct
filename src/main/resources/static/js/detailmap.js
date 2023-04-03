@@ -19,8 +19,8 @@ $(function () {
     marker.setMap(map); // Map에 실제로 marker를 셋팅
 
 
-    const iwContent =`<div class="marker_naming"style="padding:5px;">${boardMapName}<div class="info_url"><a href="https://map.kakao.com/link/map/${boardMapName},${boardMapCordx},${boardMapCordy}" target="_blank">지도에서보기</a> <a href="https://map.kakao.com/link/to/${boardMapName},${boardMapCordy},${boardMapCordy}"target="_blank">길찾기</a></div></div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-    
+    const iwContent = `<div class="marker_naming"style="padding:5px;">${boardMapName}<div class="info_url"><a href="https://map.kakao.com/link/map/${boardMapName},${boardMapCordx},${boardMapCordy}" target="_blank">지도에서보기</a> <a href="https://map.kakao.com/link/to/${boardMapName},${boardMapCordy},${boardMapCordy}"target="_blank">길찾기</a></div></div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
     //마커에 인포 윈도우를 생성해준다.
     const infowindow = new kakao.maps.InfoWindow({
         position: markerPosition,  // 원래는 iwContent와함께 인포윈도우의 좌표를 설정하지만 나는 이미 만들어놓은 좌표값이 존재함. 그래서 div만생성
@@ -29,10 +29,9 @@ $(function () {
     infowindow.open(map, marker);   // Map에 인포윈도우를 위치하는 실제 기능
 
 
-
     if (navigator.geolocation) {
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
 
             const lat = position.coords.latitude, // 위도
                 lon = position.coords.longitude; // 경도
@@ -57,14 +56,13 @@ $(function () {
             iwRemoveable = true;
         // 인포윈도우를 생성합니다
         const infowindow = new kakao.maps.InfoWindow({
-            content : iwContent,
-            removable : iwRemoveable
+            content: iwContent,
+            removable: iwRemoveable
         });
         // 인포윈도우를 마커위에 표시합니다
         infowindow.open(map, marker);
         map.setCenter(markerPosition);
     }
-
 
 
 // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
@@ -79,36 +77,52 @@ $(function () {
 });
 
 
+$(function () {
+    const boardNo = $("input[name=boardNo]").val();
+    const clubEmail = $("input[name=email]").val();
 
+    ajaxCall("/boards/review", "GET", {}, function (data) {
+        const dataChk=data;
+        console.log(data);
+        console.log(data.list);
 
+        const html = reviewList(dataChk.list);
+        $(".reviewListBox").html(html);
+    }, function () {
+        alert("모임 참가 신청 에러 발생");
+    },)
 
-$(function (){
-    const boardNo=$("input[name=boardNo]").val();
-    const clubEmail=$("input[name=email]").val();
-    function emailChk(email){
-        if(email==null){
+    function emailChk(email) {
+        if (email == null) {
             alert("로그인 후 참가 가능합니다.");
             return;
         }
     }
-    $(".groupAdd_btn").click(function (){
+
+    $(".groupAdd_btn").click(function () {
         emailChk(clubEmail);
-        ajaxCall("/boards/club","POST",{clubEmail,boardNo},function (data)
-        {
-            if(data!=null){
+        ajaxCall("/boards/club", "POST", {clubEmail, boardNo}, function (data) {
+            if (data != null) {
                 alert("모임 참가신청 성공");
             }
-        },function (){
+        }, function () {
             alert("모임 참가 신청 에러 발생");
         },)
     });
-    $(".review_add_btn").click(function(){
-        const reviewContent=$("textarea[name=reviewContent]").val();
-        const reviewWriter=clubEmail;
+    $(".review_add_btn").click(function () {
+        const reviewContent = $("textarea[name=reviewContent]").val();
+        const reviewWriter = clubEmail;
         emailChk(reviewWriter);
-        ajaxCall("/boards/review","POST",{reviewWriter,boardNo,reviewContent},function (data)
-        {
-         const html=`
+        ajaxCall("/boards/review", "POST", {reviewWriter, boardNo, reviewContent}, function (data) {
+            const html = reviewCreate(data);
+            $(".reviewListBox").append(html);
+        }, function () {
+            alert("모임 참가 신청 에러 발생");
+        },)
+    });
+
+    function reviewCreate(data) {
+        const html = `
            <div class="reviewTag">
                     <div class="reviewText">
                         <span class="reviewEmail">${data.reviewWriter}</span>
@@ -124,13 +138,32 @@ $(function (){
                     </div>
                 </div>
          `;
-         $(".reviewListBox").append(html);
 
-        },function (){
-            alert("모임 참가 신청 에러 발생");
-        },)
-    });
+        return html;
+    }
 
+    function reviewList(data) {
+        let html = "";
+        $(data).each(function (index, item) {
+            html += `
+           <div class="reviewTag">
+                    <div class="reviewText">
+                        <span class="reviewEmail">${item.reviewWriter}</span>
+                        <span class="reviewDate">${item.reviewDate}</span>
+                    </div>
+                    <div class="reviewContent">
+                        ${item.reviewContent}
+                    </div>
+                    <div class="reviewBtn">
+                        <a href="#">수정</a>
+                        <a href="#">삭제</a>
+                        <a href="#">대댓글</a>
+                    </div>
+                </div>
+         `;
+        });
+        return html;
+    }
 
 
 })

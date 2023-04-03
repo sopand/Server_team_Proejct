@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.study.service.DuplicationService.setPagingData;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -40,7 +42,8 @@ public class BoardService {
     @Transactional(readOnly = true)
     public PagingListGroup findAllBoards(Pageable pageable){
       Page<Board> getPagingList=boardRepository.findAll(pageable);
-        return setPagingData(getPagingList);
+        List<BoardResponse> pagingBoardResponse = getPagingList.stream().filter(entity -> getPagingList != null).map(BoardResponse::new).toList();
+        return setPagingData(getPagingList,pagingBoardResponse);
     }
     
     @Transactional
@@ -51,17 +54,5 @@ public class BoardService {
     }
 
 
-    public static PagingListGroup setPagingData(Page<Board> pagingBoardList) {
-        List<BoardResponse> pagingBoardResponse = pagingBoardList.stream().filter(entity -> pagingBoardList != null).map(BoardResponse::new).toList();
-        int nowPage = pagingBoardList.getPageable().getPageNumber() + 1; // 현재 페이지에 대한 값으로 pageable의 시작페이지가 0이기 때문에 +1 시켜 1부터 시작하게 만든다.
-        int startPage = Math.max(nowPage - 4, 1); // View에 출력될 최소페이지설정, 최소 값은 1이고 Now(현재 페이지)값 - 4한값이 더 크다면 시작 페이지 값이 변경된다.
-        int endPage = Math.min(nowPage + 5, pagingBoardList.getTotalPages());  // View에 보이게 될 최대 페이지 사이즈,
-        PagingListGroup paging=PagingListGroup.builder()
-                .list(pagingBoardResponse)
-                .nowPage(nowPage)
-                .startPage(startPage)
-                .endPage(endPage)
-                .build();
-        return paging;
-    }
+
 }
