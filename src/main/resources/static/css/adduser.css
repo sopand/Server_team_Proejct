@@ -24,7 +24,7 @@
 
 }
 
-.add_tag1, .add_tag2 {
+.add_tag1, .add_tag2,.add_tag3 {
     width: 700px;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@
     margin-top: 15px;
 }
 
-.add_tag1 span, .add_tag2 span {
+.add_tag1 span, .add_tag2 span,.add_tag3 span {
     width: 150px;
     display: flex;
     align-items: center;
@@ -76,4 +76,26 @@
     font-weight: bold;
     color: white;
     margin-top: 50px;
+}
+
+.add_tag3 input {
+    width: 370px;
+    height: 50px;
+    border: 1px solid #e2e2e2;
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+    border-radius: 5px;
+}
+.add_tag3 button{
+    width:150px;
+    margin-left: 30px;
+    height:50px;
+    border:1px solid #e2e2e2;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.add_tag3 button:hover{
+    background-color: #4285F4;
+    color:white;
 }

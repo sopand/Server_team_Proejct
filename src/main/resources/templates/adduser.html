@@ -19,10 +19,15 @@
 
     <main class="adduser_main_con">
         <form class="adduser_main_box" action="/users" method="POST" th:if="${user}==null">
-            <label class="add_tag1">
+            <div class="add_tag3">
                 <span>이메일 : </span>
                 <input name="email" type="email">
-            </label>
+                <button class="emailChk" type="button">
+                    이메일 인증
+                </button>
+            </div>
+            <input type="hidden" name="emailChk">
+
             <label class="add_tag1">
                 <span>비밀번호 : </span>
                 <input name="password" type="password">
@@ -68,30 +73,30 @@
                 </div>
             </div>
 
-            <button class="adduser_btn">회원 등록 완료</button>
+            <button class="adduser_btn" type="button">회원 등록 완료</button>
 
         </form>
-        <input type="hidden"  th:value="${user.sportTimeFrom}" th:if="${user}!=null" class="beFrom">
+        <input type="hidden" th:value="${user.sportTimeFrom}" th:if="${user}!=null" class="beFrom">
         <input type="hidden" th:value="${user.sportTimeUntil}" th:if="${user}!=null" class="beUntil">
 
         <form class="adduser_main_box" action="/users" th:method="PUT" th:if="${user}!=null">
             <label class="add_tag1">
                 <span>이메일 : </span>
-                <input name="email" type="email"  th:value="${user.email}" readonly>
+                <input name="email" type="email" th:value="${user.email}" readonly>
             </label>
             <th:block th:if="${user.oauthMemberCheck}!='Y'">
-            <label class="add_tag1" >
-                <span>기존 비밀번호: </span>
-                <input name="beforePassword" type="password">
-            </label>
-            <label class="add_tag1" >
-                <span>새비밀번호 : </span>
-                <input name="password" type="password">
-            </label>
-            <label class="add_tag1">
-                <span>새비밀번호 확인 : </span>
-                <input name="passwordCheck" type="password">
-            </label>
+                <label class="add_tag1">
+                    <span>기존 비밀번호: </span>
+                    <input name="beforePassword" type="password">
+                </label>
+                <label class="add_tag1">
+                    <span>새비밀번호 : </span>
+                    <input name="password" type="password">
+                </label>
+                <label class="add_tag1">
+                    <span>새비밀번호 확인 : </span>
+                    <input name="passwordCheck" type="password">
+                </label>
             </th:block>
             <label class="add_tag1">
                 <span>닉네임 : </span>
@@ -111,7 +116,7 @@
                 <span>관심 운동 : </span>
                 <select name="sportNo">
                     <option value="">본인의 운동 선택</option>
-                    <option th:each="sports :${getSports}" th:value="${sports.getSpoNo()}" th:text="${sports.getSpoName()}"  th:selected="${sports.getSpoNo()} == ${user.spoNo}">본인의 운동 선택</option>
+                    <option th:each="sports :${getSports}" th:value="${sports.getSpoNo()}" th:text="${sports.getSpoName()}" th:selected="${sports.getSpoNo()} == ${user.spoNo}">본인의 운동 선택</option>
                     <option value="기타">기타</option>
                 </select>
             </label>

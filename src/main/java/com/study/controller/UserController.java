@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 import java.util.List;
@@ -87,6 +88,16 @@ public class UserController {
         userService.modifyUser(userRequest);
         return "redirect:/index";
     }
+
+    @ResponseBody
+    @GetMapping("/users/email")
+    public String emailCheck(String email){
+        UserResponse getUser=userService.findUserByEmail(email);
+       return getUser==null ? null : getUser.getEmail();
+
+    }
+
+
 
 
 

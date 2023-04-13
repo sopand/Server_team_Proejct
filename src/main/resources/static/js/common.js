@@ -34,3 +34,9 @@
         }
         return html;
     }
+
+    function NotnullChk(check){
+        if(check!=null && check!=""){
+            return true;
+        }
+    }

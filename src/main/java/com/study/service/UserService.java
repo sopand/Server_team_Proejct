@@ -41,13 +41,12 @@ public class UserService implements UserDetailsService {
     }
     @Transactional(readOnly = true)
     public UserResponse findUserByEmail(String email) {
-        return userRepository.findByEmail(email).map(UserResponse::new).orElseThrow();
+        return userRepository.findByEmail(email).map(UserResponse::new).orElse(null);
     }
 
     @Transactional
     public void modifyUser(UserRequest userRequest) throws Exception {
         User user = userRepository.findByEmail(userRequest.getEmail()).orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER_EMAIL));
-
         if (user.getOauthMemberCheck().equals(oAuthChk.OAUTH_USER.getStatus())) {
             user.oAuthUserUpdate(userRequest);
             return ;
