@@ -1,3 +1,4 @@
+
 spring:
   profiles:
     include: config
@@ -93,5 +94,3 @@ spring:
       connection-test-query: SELECT NOW() FROM dual
 
 ---
-
-

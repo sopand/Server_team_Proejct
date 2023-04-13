@@ -1,4 +1,4 @@
-package com.example.shop.config;
+package com.study.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -9,28 +9,24 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-
-/**
- * 이메일 전송을 위한 설정을 해놓은 설정파일.
- */
 @Configuration
 @PropertySource("classpath:application.yml") // Property의 값을 가져오기 위한 것 Configuration과 함께 사용된다.
 public class EmailConfig {
-    // application.yml에서 설정해놓은 여러 설정 값들을 Value를 이용하여 가져온다.
-    @Value("${spring.mail.username}")
+
+    @Value("${spring.mail.username}") // application.yml에서 설정해놓은 값을 불러온다 
     private String id;
     @Value("${spring.mail.password}")
     private String password;
     @Value("${spring.mail.host}")
     private String host;
-    @Value("${spring.mail.port}")
+    @Value("${spring.mail.port}")   
     private int port;
 
     @Bean
     public JavaMailSender javaMailService() { //Java의 메일을 전송시키기위한 API를 Bean으로 구성하여 설정값을 셋팅
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
-        javaMailSender.setHost(host); // SMTP서버의 주소를 설정 = 465
+        javaMailSender.setHost(host); // SMTP서버의 주소를 설정 = 465 
         javaMailSender.setUsername(id); // 설정(발신) 메일 아이디
         javaMailSender.setPassword(password); // 설정(발신) 메일 패스워드
         javaMailSender.setPort(port); //smtp port
@@ -39,12 +35,13 @@ public class EmailConfig {
         return javaMailSender;
     }
 
-    private Properties getMailProperties() {
+    private Properties getMailProperties() {  
         Properties prop =System.getProperties(); // System.getProperties = 현재 위치나 시스템(운영체제(OS)나 JVM 에 의존적인 정보)를 가져올때 사용
-        // Properties =  Key=Value형식으로 파라미터 정보들을 저장하기 위한 파일 확장자
-        // 주로 응용 프로그램에 대한 환경설정정보, DB와 연결하기 위한 DB환경설정정보 등을 저장할때 사용
+        										// Properties =  Key=Value형식으로 파라미터 정보들을 저장하기 위한 파일 확장자
+        										// 주로 응용 프로그램에 대한 환경설정정보, DB와 연결하기 위한 DB환경설정정보 등을 저장할때 사용
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true");
+               
         return prop;
     }
 }

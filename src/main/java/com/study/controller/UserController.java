@@ -3,6 +3,7 @@ package com.study.controller;
 import com.study.dto.SportResponse;
 import com.study.dto.UserRequest;
 import com.study.dto.UserResponse;
+import com.study.service.EmailService;
 import com.study.service.SportService;
 import com.study.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class UserController {
     private final SportService sportService;
     private final UserService userService;
 
+    private final EmailService emailService;
 
     /**
      * 유저의 정보와 관련된 데이터에서 자주 사용하는 principal을 인자로받아 로그인정보에서 로그인된 사람의 아이디값을 리턴시켜준다.
@@ -91,10 +93,12 @@ public class UserController {
 
     @ResponseBody
     @GetMapping("/users/email")
-    public String emailCheck(String email){
+    public String emailCheck(String email) throws Exception {
         UserResponse getUser=userService.findUserByEmail(email);
-       return getUser==null ? null : getUser.getEmail();
-
+        if(getUser==null){
+            return emailService.sendSimpleMessage(email);
+        }
+        return "";
     }
 
 

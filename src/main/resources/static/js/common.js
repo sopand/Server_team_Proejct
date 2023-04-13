@@ -40,3 +40,9 @@
             return true;
         }
     }
+    function NullChk(check){
+        if(check==null || check==""){
+            return true;
+        }
+    }
+    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
