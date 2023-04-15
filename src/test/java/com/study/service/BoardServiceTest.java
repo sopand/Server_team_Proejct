@@ -7,6 +7,7 @@ import com.study.entity.Board;
 import com.study.entity.BoardRepository;
 import com.study.entity.User;
 import com.study.entity.UserRepository;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,6 +42,11 @@ class BoardServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @BeforeAll
+    public void createBoardEntity() throws ParseException {
+        BoardRequest stubBoardReqeust=createBoardRequest();
+        boardRepository.save(stubBoardReqeust.toTestCreateBoard());
+    }
     @Test
     @DisplayName("게시글 생성")
     void createBoard() throws Exception {
@@ -73,7 +79,9 @@ class BoardServiceTest {
     }
 
     @Test
+    @DisplayName("게시글 상세보기")
     void findBoard() {
+        //given
     }
 
     private List<Board> createBoardList(){

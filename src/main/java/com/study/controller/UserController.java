@@ -85,20 +85,30 @@ public class UserController {
     }
 
 
+    /**
+     * 유저의 데이터를 수정하는 기능을 담당하는 맵핑
+     * @param userRequest = 수정할 데이터를 저장하고 있는 객체
+     * @return = 중복 수정의 방지를 위한 Redirect
+     * @throws Exception
+     */
     @PutMapping("/users")
     public String modifyUser(UserRequest userRequest) throws Exception {
         userService.modifyUser(userRequest);
         return "redirect:/index";
     }
 
+
+    /**
+     * 회원 가입시 이메일 인증 체크를 위한 객체,
+     * @param email
+     * @return
+     * @throws Exception
+     */
     @ResponseBody
     @GetMapping("/users/email")
     public String emailCheck(String email) throws Exception {
         UserResponse getUser=userService.findUserByEmail(email);
-        if(getUser==null){
-            return emailService.sendSimpleMessage(email);
-        }
-        return "";
+        return getUser==null ? emailService.sendSimpleMessage(email) : "" ;
     }
 
 

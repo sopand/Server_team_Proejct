@@ -32,8 +32,8 @@ public class ReviewController {
     }
 
     @GetMapping("/boards/review")
-    public PagingListGroup findReviewList(@PageableDefault(page = 0, size = 10, sort = "reviewNo", direction = Sort.Direction.DESC) Pageable pageable){
-        return reviewService.findReviewList(pageable);
+    public PagingListGroup findReviewList(Long boardNo,@PageableDefault(page = 0, size = 10, sort = "reviewNo", direction = Sort.Direction.DESC) Pageable pageable){
+        return reviewService.findReviewList(pageable,boardNo);
 
     }
 

@@ -27,8 +27,8 @@ public class ReviewService {
     }
 
 
-    public PagingListGroup findReviewList(Pageable pageable){
-        Page<Review> getReviewPagingList=reviewRepository.findAll(pageable);
+    public PagingListGroup findReviewList(Pageable pageable,Long boardNo){
+        Page<Review> getReviewPagingList=reviewRepository.findByBoardBoardNo(pageable,boardNo);
         List<ReviewResponse> pagingReviewResponse = getReviewPagingList.stream().filter(entity -> getReviewPagingList != null).map(ReviewResponse::new).toList();
         return DuplicationService.setPagingData(getReviewPagingList,pagingReviewResponse);
 

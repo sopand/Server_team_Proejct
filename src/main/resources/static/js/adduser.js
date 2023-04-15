@@ -24,9 +24,9 @@ $(function () {
         if(regex.test(email)){
             ajaxCall("/users/email", "GET", {email}, function (data) {
                     if (NotnullChk(data)) {
-                        emailChkCode==data;
+                        emailChkCode=data;
                         $("input[name=email]").attr("readonly",true);
-                        alert("이메일 체크 완료");
+                        alert("이메일 인증코드 전송완료");
                         return;
                     }
                     alert("이미 존재하는 이메일입니다");

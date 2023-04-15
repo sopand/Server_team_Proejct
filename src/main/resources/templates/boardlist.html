@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
     <script type="text/javascript" th:src="@{/js/header.js}"></script>
+    <script type="text/javascript" th:src="@{/js/boardlist.js}"></script>
 
 </head>
 <body>
@@ -35,8 +36,9 @@
             </div>
         </form>
         <div class="boardList_btn_box">
-            <a href="/boards">게시글 등록</a>
+            <a href="/boards" class="addBoard_btn">게시글 등록</a>
         </div>
+        <input type="hidden" name="email" sec:authorize="isAuthenticated()"  th:value="${#authentication.name}" >
         <div class="boardList_main_box" th:if="${!#lists.isEmpty(board)}">
             <ul class="boardList_content_top">
                 <li class="board_no">No</li>

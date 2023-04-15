@@ -16,10 +16,11 @@
     flex-direction: column;
 }
 .boardList_btn_box{
-    width:800px;
+    width:1200px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-top:50px;
 }
 .boardList_btn_box a{
     width: 150px;
@@ -127,4 +128,27 @@
     width:300px;
     height: 50px;
     border:2px solid #e2e2e2;
+}
+.search_box button{
+    width:75px;
+    height: 50px;
+    border:1px solid #e2e2e2;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.sort_box{
+    width:150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sort_box select{
+    width:150px;
+    display: flex;
+    align-items: center;
+    border:1px solid #e2e2e2;
+    font-weight: bold;
+    height: 50px;
+    margin-left: 30px;
+    border-radius: 10px;
 }

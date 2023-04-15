@@ -5,6 +5,7 @@ import com.study.dto.UserRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
@@ -32,7 +33,8 @@ class UserRepositoryTest {
         userRepository.save(createUserRequest().toCreateUserEntity());
     }
     @Test
-    void 이메일로_USER찾기() {
+    @DisplayName("이메일로 USER 찾아오기")
+    void findByEmail() {
         //given
         UserRequest stubUserRequest=createUserRequest();
         //when

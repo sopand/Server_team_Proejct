@@ -45,4 +45,11 @@
             return true;
         }
     }
+
+    function emailChk(email) {
+        if (email == null) {
+            alert("로그인 후 사용 가능합니다.");
+            return true;
+        }
+    }
     let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');

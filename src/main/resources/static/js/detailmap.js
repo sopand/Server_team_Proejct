@@ -81,28 +81,22 @@ $(function () {
     const boardNo = $("input[name=boardNo]").val();
     const clubEmail = $("input[name=email]").val();
 
-    ajaxCall("/boards/review", "GET", {}, function (data) {
+    ajaxCall("/boards/review", "GET", {boardNo}, function (data) {
         const dataChk=data;
-        console.log(data);
-        console.log(data.list);
-
         const html = reviewList(dataChk.list);
         $(".reviewListBox").html(html);
     }, function () {
         alert("모임 참가 신청 에러 발생");
     },)
 
-    function emailChk(email) {
-        if (email == null) {
-            alert("로그인 후 참가 가능합니다.");
-            return;
-        }
-    }
+
 
     $(".groupAdd_btn").click(function () {
-        emailChk(clubEmail);
+        if(emailChk(clubEmail)){
+            return;
+        }
         ajaxCall("/boards/club", "POST", {clubEmail, boardNo}, function (data) {
-            if (data != null) {
+            if (NotnullChk(data)) {
                 alert("모임 참가신청 성공");
             }
         }, function () {
@@ -112,7 +106,9 @@ $(function () {
     $(".review_add_btn").click(function () {
         const reviewContent = $("textarea[name=reviewContent]").val();
         const reviewWriter = clubEmail;
-        emailChk(reviewWriter);
+        if(emailChk(reviewWriter)){
+            return;
+        }
         ajaxCall("/boards/review", "POST", {reviewWriter, boardNo, reviewContent}, function (data) {
             const html = reviewCreate(data);
             $(".reviewListBox").append(html);
