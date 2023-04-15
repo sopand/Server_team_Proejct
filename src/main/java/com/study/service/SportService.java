@@ -13,6 +13,10 @@ public class SportService {
 
     private final SportRepository sportRepository;
 
+    /**
+     * 헤더에 각각의 운동 종목을 출력시켜주기 위한 로직
+     * @return = Sport를 응답객체로 변환해서 리턴
+     */
     public List<SportResponse> findSports(){
         return sportRepository.findAllByOrderBySpoNoAsc().stream().map(SportResponse::new).toList();
     }

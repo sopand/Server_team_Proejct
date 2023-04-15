@@ -5,6 +5,7 @@ import com.study.entity.Sport;
 import com.study.entity.User;
 import com.study.oAuth.oAuthChk;
 import lombok.Data;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,8 @@ import java.util.Date;
 
 @Data
 public class UserRequest {
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 패스워드 암호화를 위한 용도
 
     private String nickname;
 
@@ -53,7 +56,7 @@ public class UserRequest {
                 .nickname(nickname)
                 .name(name)
                 .email(email)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .sport(toSportEntityChange())
                 .sportTimeFrom(toDateChanger(sportTimeFrom))
                 .sportTimeUntil(toDateChanger(sportTimeUntil))

@@ -25,7 +25,7 @@ public class ImgService {
     /**
      * 이미지를 등록해주는 로직,
      * @param file = 사용자가 입력한 이미지의 데이터가 들어있는 객체,
-     * @return 
+     * @return = 등록된 이미지를 에디터에 노출하기 위해 다시 리턴
      * @throws IOException
      */
     @Transactional
@@ -48,6 +48,10 @@ public class ImgService {
         return mv;
     }
 
+    /**
+     * 등록한 이미지에 게시글의 고유번호를 넣기위한 로직
+     * @param boardNo = 게시글의 고유번호
+     */
     @Transactional
     public void updateBoardNo(Long boardNo){
         imgRepository.findByBoard_BoardNo(boardNo).stream().filter(entity-> entity!=null).forEach(entity->entity.updateBoardNo(boardNo));

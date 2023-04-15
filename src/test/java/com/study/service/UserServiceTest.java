@@ -32,8 +32,6 @@ class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
-    @Spy
-    private BCryptPasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void beforeCreateUser() throws ParseException {
@@ -42,7 +40,7 @@ class UserServiceTest {
 
     private UserRequest createUserRequest() {
         UserRequest stubUserRequest = new UserRequest();
-        stubUserRequest.setPassword(passwordEncoder.encode("TestPass"));
+        stubUserRequest.setPassword("TestPass");
         stubUserRequest.setPasswordCheck("TestPass");
         stubUserRequest.setBeforePassword("TestPass");
         stubUserRequest.setName("TestName");

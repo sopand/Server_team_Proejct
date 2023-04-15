@@ -28,7 +28,7 @@ public class Board{
     private Sport sport;
 
     @OneToMany(mappedBy ="board",cascade = CascadeType.ALL)
-    private List<Club> club=new ArrayList<>();
+    private List<Club> club;
 
     private String boardName;
     private String boardContent;

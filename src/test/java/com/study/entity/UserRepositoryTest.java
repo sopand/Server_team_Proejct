@@ -32,6 +32,21 @@ class UserRepositoryTest {
     public void beforeCreateUser() throws ParseException {
         userRepository.save(createUserRequest().toCreateUserEntity());
     }
+
+    @Test
+    @DisplayName("회원가입")
+    void createUser() throws ParseException {
+        //given
+        UserRequest getRequest=createUserRequest();
+        getRequest.setEmail("Test2");
+        getRequest.setNickname("TDD");
+        //when
+        User addUser=userRepository.save(getRequest.toCreateUserEntity());
+        //then
+        log.info("해당 비밀번호{}", addUser.getPassword());
+        assertThat(addUser.getEmail()).isEqualTo("Test2");
+        assertThat(addUser.getNickname()).isEqualTo("TDD");
+    }
     @Test
     @DisplayName("이메일로 USER 찾아오기")
     void findByEmail() {
