@@ -82,6 +82,7 @@ class BoardServiceTest {
     @DisplayName("게시글 상세보기")
     void findBoard() {
         //given
+
     }
 
     private List<Board> createBoardList(){
