@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/boardadd.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/reset2.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/header.js}"></script>
+    <script type="text/javascript" th:src="@{/js/boardadd.js}"></script>
+
+
+</head>
+<body>
+<div class="container">
+    <header th:replace="header :: header"></header>
+
+    <form class="boardAdd_main_con" action="/boards" method="POST">
+        <div class="boardAdd_main_box">
+            <label class="boardAddTag1">
+                <span>제목 : </span>
+                <input name="boardName" placeholder="게시글 제목을 입력해주세요~!">
+            </label>
+
+            <label class="boardAddTag1">
+                <span>글쓴이 : </span>
+                <input name="email" th:value="${#authentication.name}" readonly>
+            </label>
+            <label class="boardAddTag1">
+                <span>모집 인원 : </span>
+                <select name="boardPeople">
+
+                </select>
+            </label>
+
+
+            <div class="boardAddTag2">
+                <span>운동 시간: </span>
+                <div class="tag_time">
+                    <input type="datetime-local" name="boardPromiseFrom" >
+                   부터
+                    <input type="datetime-local" name="boardPromiseUntil">
+                    까지
+                </div>
+            </div>
+            <label class="boardAddTag1">
+                <span>찾는 운동 : </span>
+                <select name="spoNo">
+                    <option value="">파트너를 구하려는 운동 종목 선택</option>
+                    <option th:each="sports :${getSports}" th:value="${sports.getSpoNo()}" th:text="${sports.getSpoName()}">본인의 운동 선택</option>
+                    <option value="기타">기타</option>
+                </select>
+            </label>
+
+        </div>
+
+
+        <div class="editorBox">
+            <span class="editorTag"> 게시글 내용 입력</span>
+            <textarea name="boardContent" id="editor"></textarea>
+        </div>
+
+
+        <span class="map_tag">약속 장소 지정</span>
+
+
+        <input type="hidden" name="boardMapCordx">
+        <input type="hidden" name="boardMapCordy">
+        <input type="hidden" name="imgList">
+        <label class="boardAddTag3">
+            <span>약속 장소 : </span>
+            <input type="text" name="boardMapName" class="board_map_name" placeholder="지도에서 선택하면 자동 설정됩니다." readonly>
+        </label>
+
+        <button type="button" class="boardAddbtn">게시물 등록완료</button>
+    </form>
+    <div class="map_wrap">
+
+        <div id="map"></div>
+        <div id="menu_wrap" class="bg_white">
+            <div class="option">
+                <div>
+                    <form onsubmit="searchPlaces(); return false;">
+                        키워드 :
+                        <input type="text" value="이태원 맛집" id="keyword" size="15">
+                        <button type="submit">검색하기</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <ul id="placesList"></ul>
+            <div id="pagination"></div>
+        </div>
+    </div>
+
+    <footer th:replace="footer :: footer"></footer>
+
+</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed54528b2732a15c5f14217345300d6&libraries=services"></script>
+<script src="/js/map.js"></script>
+<script src="/js/editor.js"></script>
+
+</body>
+</html>

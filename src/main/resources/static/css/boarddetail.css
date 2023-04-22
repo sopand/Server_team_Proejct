@@ -1,0 +1,249 @@
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.board_detail_main_con{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 150px;
+    padding-top: 150px;
+    flex-direction: column;
+}
+.board_detail_main_box{
+    width:1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border:1px solid #e2e2e2;
+}
+
+.detail_tag1 *{
+    font-weight: bold;
+    color:gray;
+}
+.tag1_name{
+    width:600px;
+    margin-left:50px;
+    font-size: 20px;
+
+}
+.tag1_time{
+    margin-left: 150px;
+    font-size: 12px;
+}
+
+.detail_tag1,.detail_tag2,.detail_tag3{
+    width:1000px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #e2e2e2;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.detail_tag2 *{
+    font-weight: bold;
+}
+.tag2_name{
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+.groupTag{
+    color:red;
+}
+.tag2_content{
+    padding-left: 50px;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+.tag3_content{
+    font-weight: bold;
+    color:red;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+.groupAdd_btn{
+    width:300px;
+    background-color: #4285F4;
+    color:white;
+    font-weight: bold;
+    height: 50px;
+    margin:30px;
+}
+
+
+
+
+
+
+
+
+
+
+.detail_text{
+    width:1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color:#4285F4;
+    margin:40px;
+}
+.detail_tag4{
+    width: 1000px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 50px;
+}
+#map{
+    width:1000px;
+    height: 600px;
+
+}
+.marker_naming{
+    width:200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 20px;
+    font-weight: bold;
+}
+.info_url{
+    margin:10px;
+    width:200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.info_url a{
+    font-size: 16px;
+    font-weight: bold;
+    color:blue;
+}
+
+.myMap{
+    width:300px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: bold;
+    color:red;
+}
+
+.review_box{
+    width:1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:100px;
+    flex-direction: column;
+
+}
+.reviewForm textarea{
+    width:750px;
+    height: 75px;
+    border:1px solid #e2e2e2;
+    padding-left:20px;
+    padding-top: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    resize: none;
+}
+.reviewForm button{
+    width:150px;
+    height: 75px;
+    color:white;
+    background-color: #4285F4;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 50px;
+}
+.reviewListBox{
+    width:950px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.reviewTag{
+    width:950px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border:1px solid #e2e2e2;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.reviewText{
+    width:950px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+.reviewEmail{
+    width:500px;
+}
+.reviewDate{
+    width:400px;
+}
+.reviewEmail,.reviewDate{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color:gray;
+    padding-left: 20px;
+}
+.reviewContent{
+    width: 950px;
+    display: flex;
+    padding-left: 20px;
+    padding-top: 20px;
+    min-height: 75px;
+}
+.reviewBtn{
+    padding-top:15px;
+    padding-bottom: 15px;
+    width:950px;
+    display: flex;
+    align-items: center;
+}
+.reviewBtn a{
+    font-size: 16px;
+    font-weight: bold;
+    color:gray;
+    width:100px;
+    margin-left: 20px;
+}
+
+
+
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/boarddetail.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/reset2.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/header.js}"></script>
+
+
+</head>
+<body>
+<div class="container">
+    <header th:replace="header :: header"></header>
+
+    <main class="board_detail_main_con">
+        <div class="board_detail_main_box">
+            <div class="detail_tag1">
+                <span class="tag1_name" th:text="|제목 : ${board.boardName}|"></span>
+                <span class="tag1_time" th:text="|글 등록: ${board.createDate}|"></span>
+            </div>
+            <div class="detail_tag2">
+                <span class="tag2_name" th:text="|운동 종목 : ${board.sport.spoName}|"></span>
+                <span class="tag2_content" th:text="|모집인 : ${board.user.email}|"></span>
+            </div>
+
+            <div class="detail_tag2">
+                <span class="groupTag tag2_name" th:text="|모임 장소 : ${board.boardMapName}|"></span>
+                <span class="groupTag tag2_content" th:text="|모집인원 : ${board.boardPeople}명   현재 인원 :${#lists.size(board.club)}명|"></span>
+            </div>
+            <div class="detail_tag3">
+                <span class="tag3_content" th:text="|약속 시간 :${#strings.substring(board.boardPromiseFrom, 0, 19)} 부터 ${#strings.substring(board.boardPromiseUntil, 0, 19)} 까지 예정|"></span>
+            </div>
+
+            <span class="detail_text">약속 장소 상세지도</span>
+            <div id="map"></div>
+
+            <span class="detail_text">상세 모집 내용</span>
+            <div class="detail_tag4" th:utext="${board.boardContent}">
+            </div>
+
+
+            <input type="hidden" name="boardNo" th:value="${board.boardNo}">
+            <input type="hidden" name="email" th:value="${#authentication.name}" sec:authorize="isAuthenticated()">
+            <button type="button" class="groupAdd_btn">모임 참가하기</button>
+
+        </div>
+
+        <div class="review_box">
+            <form action="/boards/review" class="reviewForm">
+                <textarea name="reviewContent"></textarea>
+                <button type="button" class="review_add_btn">댓글 등록</button>
+            </form>
+
+            <div class="reviewListBox">
+
+            </div>
+        </div>
+    </main>
+    <input type="hidden" name="boardMapCordx" th:value="${board.boardMapCordx}">
+    <input type="hidden" name="boardMapCordy" th:value="${board.boardMapCordy}">
+    <input type="hidden" name="boardMapName" th:value="${board.boardMapName}">
+    <footer th:replace="footer :: footer"></footer>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed54528b2732a15c5f14217345300d6&libraries=services"></script>
+    <script src="/js/detailmap.js"></script>
+</div>
+</body>
+</html>

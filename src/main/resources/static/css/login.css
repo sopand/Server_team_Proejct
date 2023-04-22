@@ -1,0 +1,115 @@
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login_main_con {
+    padding-top: 150px;
+    padding-bottom: 150px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login_main_box {
+    width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e2e2;
+}
+
+.login_img_box {
+    width: 400px;
+    height: 600px;
+}
+
+.login_img_box img {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.login_text_box{
+    width:600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.login_text_box label{
+    margin:10px;
+    width:600px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.login_text_box label span{
+    width:80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 22px;
+    font-weight: bold;
+    color:gray;
+    margin-right: 20px;
+}
+.login_text_box input{
+    width:400px;
+    height: 50px;
+    border:2px solid #e2e2e2;
+    border-radius: 10px;
+
+}
+.login_btn{
+    width:400px;
+    height: 50px;
+    background-color: #4285F4;
+    border-radius: 5px;
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top:10px;
+}
+.add_member_move{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:400px;
+    height: 50px;
+    background-color: gray;
+    border-radius: 5px;
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top:10px;
+
+}
+.find_member_move{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:400px;
+    height: 50px;
+    background-color: #EA4335;
+    border-radius: 5px;
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top:10px;
+}
+
+.sns_btn_box{
+    width:400px;
+    margin-top: 10px;
+}
+.sns_btn_box img{
+    width:400px;
+    height:55px;
+
+}
